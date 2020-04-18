@@ -14,6 +14,7 @@
 </p>
 
 ## ⚡️ Live
+
 [Check it live](https://nuxt-markdown-blog-starter.netlify.com/)
 
 ## ✨ Quick start
