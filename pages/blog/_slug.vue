@@ -4,12 +4,12 @@
       <div class="elevate-cover">
         <div class="elevate-cover__textOffset">
           <div class="elevate-cover__left">
-            <nuxt-link :to="localePath('index')">
+            <nuxt-link :to="localePath('blog')">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 6 4"
                 aria-hidden="true"
-                style="width: 16px; transform: rotate(180deg);"
+                style="width: 16px; transform: rotate(180deg); margin-right: 0.8rem;"
               >
                 <polygon
                   fill="currentColor"
@@ -28,7 +28,7 @@
                 :key="i"
                 :to="
                   `${
-                    locale.code == 'en' ? '' : '/' + locale.code
+                    locale.code == 'ko' ? '' : '/' + locale.code
                   }/blog/${trans}`
                 "
               >

@@ -6,22 +6,22 @@ const I18N = {
       code: 'en',
       iso: 'en-US',
       name: 'English',
-      file: 'en/index.js'
+      file: 'en/index.js',
     },
     {
-      code: 'es',
-      iso: 'es-ES',
-      name: 'Español',
-      file: 'es/index.js'
-    }
+      code: 'ko',
+      iso: 'ko-Kr',
+      name: '한국어',
+      file: 'ko/index.js',
+    },
   ],
   lazy: true,
   seo: false,
   langDir: '/locales/',
-  defaultLocale: 'en',
-  parsePages: false
-}
+  defaultLocale: 'ko',
+  parsePages: false,
+};
 
 module.exports = {
-  I18N
-}
+  I18N,
+};

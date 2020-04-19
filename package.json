@@ -1,7 +1,7 @@
 {
   "name": "nuxt-markdown-blog-starter",
   "version": "1.0.0",
-  "author": "marinaaisa <marina@marinaaisa.com>",
+  "author": "Jungin Kwon <jungin.kwon1@gmail.com>",
   "private": true,
   "engines": {
     "node": ">=8.0.0",

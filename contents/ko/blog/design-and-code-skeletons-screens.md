@@ -1,7 +1,7 @@
 ---
-name: 'disena-programa-skeletons-screens'
+name: 'design-and-code-skeletons-screens'
 trans: 'design-and-code-skeletons-screens'
-title: Diseña y programa responsive Skeleton Screens
+title: Skeleton 뷰란
 year: 1 Mayo 2019
 color: '#edece7'
 isTextColorDark: true
@@ -12,7 +12,7 @@ description: |
   Aprenderás a diseñar un Skeleton Screen pensando en su asincronometría y programarlo en base a modos de opacidad de Sketch o Photoshop.
 ---
 
-## ¿Qué son las Skeleton Screens?
+## Skeleton 뷰란
 
 Seguramente Facebook o Linkedin han sido los principales impulsores de los llamados Skeleton Screens. Solo tienes que entrar con tu cuenta de usuario y verás una barras que se mueven y que dan la sensación de que el contenido está cargándose.
 
@@ -34,6 +34,7 @@ Es un ejemplo real que hice para un proyecto de [Holaluz](https://www.holaluz.co
 Para empezar el diseño necesitamos saber qué contenido será asíncrono en la carga y qué contenido no lo será, será síncrono. Si solo nos encargamos de la parte de diseño o acabamos de aterrizar en el proyecto, tendremos que preguntar a nuestros compañeros de front-end qué contenido va a enviar la API y lo más importante: qué contenido ya sabemos que vamos a mostrar.
 
 En este caso, yo como UX Engineer en este proyecto (trabajo en el diseño y en el desarrollo), ya tenía esta información y podía distinguir entre:
+
 - <strong>Contenido síncrono:</strong> la estructura de la tabla con sus titulares, que tiene 3 columnas de las cuales sé su alto.
 - <strong>Contenido asíncrono:</strong> el contenido de cada fila que la API devolverá como un objeto. Cada fila se divide en 3 columnas.
 
@@ -124,7 +125,7 @@ Resultado:
   opacity: 0;
 
   &:nth-child(2) {
-    animation-delay: .5s;
+    animation-delay: 0.5s;
   }
 
   &:nth-child(3) {
@@ -171,7 +172,7 @@ Aplicaremos un `:before` a `datagrid__row` con una posición absoluta a su eleme
 }
 
 .datagrid__row:before {
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 100%;
@@ -179,12 +180,7 @@ Aplicaremos un `:before` a `datagrid__row` con una posición absoluta a su eleme
   animation-duration: 3.5s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  background: linear-gradient(
-    to right,
-    #cccccc 2%,
-    #666666 18%,
-    #cccccc 33%
-  );
+  background: linear-gradient(to right, #cccccc 2%, #666666 18%, #cccccc 33%);
   background-size: 50%;
 }
 ```
@@ -200,6 +196,7 @@ Por último aplicamos el `mix-blend-mode: overlay` y mágicamente conseguimos qu
   mix-blend-mode: overlay;
 }
 ```
+
 Resultado:
 
 <Component :is="extraComponentLoader" />

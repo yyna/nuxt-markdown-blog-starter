@@ -1,27 +1,28 @@
 ---
-name: 'blog-usando-vue-nuxt-markdown'
-title: Web con blog y portfolio usando Vue.js + Nuxt + Markdown
-year: 1 Enero 2019
+name: 'blog-using-vue-nuxt-markdown'
+title: 내가 Nuxt 로 웹사이트를 다시 만든 이유
+year: 1 Mar 2019
 color: '#8e7964'
 trans: 'blog-using-vue-nuxt-markdown'
 id: 'vue-nuxt-blog'
 description: |
-  Cómo he creado mi nueva web con portfolio y blog en dos idiomas. Qué tecnología he utilizado y por qué.
+  내가 Nuxt 로 웹사이트를 다시 만든 이유에 대해서 알아보자
 ---
 
-## ¿Por qué re-hice mi web con Nuxt?
+## 내가 Nuxt 로 웹사이트를 다시 만든 이유
 
 Aunque algunos ya me conoceis, soy [Marina Aísa](https://twitter.com/MarinaAisa), UX Engineer (diseño y front-end) y actualmente trabajo en [Holaluz](https://www.holaluz.com).
 
 El pasado año, 2018, estuve muy enfocada en aprender más de JavaScript, la cual era una asignatura pendiente y a la vez aprendí una de sus librerías, [Vue.js](https://vuejs.org/). Al mismo tiempo, en Holaluz, empezamos a utilizar [Nuxt.js](https://nuxtjs.org/), un framework sobre VueJS para rehacer tanto las webs estáticas como las dinámicas (SPA) de la empresa en componentes y poder crear un sistema de diseño con ello.
 
 Mi web anterior estaba hecha con [Middleman](https://middlemanapp.com/), un generador de páginas estáticas basado en Ruby, así que aproveché para rehacer mi web con Nuxt y Vue, con el fin de:
+
 - Aprender
 - Mejorar la performance
 - Añadir funcionalidades a la web como un blog y portfolio
 - Añadir dos idiomas, español e inglés, **también en los posts del blog** pero de forma independiente, ya que cuento con algunos posts que no estén traducidos en ambos idiomas.
 
-Lo que más me atrae de Nuxt es la filosofía *serverless* (aunque Nuxt también puede ser SSR) y el prerendering estático que proporciona a aplicaciones SPA. Resumidamente, con ello se puede combinar lo mejor de una web estática: HTML compilado, lo que conlleva mejor SEO, y lo mejor de una *single page application*: Webpack, optimizaciones de caché, lazy-loading, funciones y datos asíncronos...
+Lo que más me atrae de Nuxt es la filosofía _serverless_ (aunque Nuxt también puede ser SSR) y el prerendering estático que proporciona a aplicaciones SPA. Resumidamente, con ello se puede combinar lo mejor de una web estática: HTML compilado, lo que conlleva mejor SEO, y lo mejor de una _single page application_: Webpack, optimizaciones de caché, lazy-loading, funciones y datos asíncronos...
 
 ## ¿De dónde saco el contenido si no tengo servidor?
 
@@ -31,15 +32,15 @@ Nuxt, al seguir la arquitectura [JAMStack](https://jamstack.org/), está constru
 
 ### Importación de los artículos en la página principal dependiendo del idioma
 
-Mediante la función asíncrona `asyncData` que proporciona Nuxt solo en sus páginas (no en sus componentes) hago una importación de los Markdown que tengo guardados en la carpeta `content` del proyecto. Posteriormente los devuelvo en forma de promesa como un array de objetos. Como puedes ver a continuación, la importación depende de la constante `blogs` que será el array `blogsEs` o `blogsEn` dependiendo del idioma de la página.
+Mediante la función asíncrona `asyncData` que proporciona Nuxt solo en sus páginas (no en sus componentes) hago una importación de los Markdown que tengo guardados en la carpeta `content` del proyecto. Posteriormente los devuelvo en forma de promesa como un array de objetos. Como puedes ver a continuación, la importación depende de la constante `blogs` que será el array `blogsKo` o `blogsEn` dependiendo del idioma de la página.
 
 ```javascript
 import blogsEn from '~/contents/en/blogsEn.js'
-import blogsEs from '~/contents/es/blogsEs.js'
+import blogsKo from '~/contents/ko/blogsKo.js'
 
 async asyncData ({app}) {
-  const blogs = app.i18n.locale === 'en' ? blogsEn : blogsEs
-  
+  const blogs = app.i18n.locale === 'en' ? blogsEn : blogsKo
+
   async function asyncImport (blogName) {
     const wholeMD = await import(`~/content/${app.i18n.locale}/blog/${blogName}.md`)
     return wholeMD.attributes
@@ -57,15 +58,13 @@ async asyncData ({app}) {
 La razón por la cual tengo los arrays de los nombres de los blogs importados desde fuera es porque quiero utilizarlos también para generar las páginas de forma estática a través del objeto [generate](https://nuxtjs.org/api/configuration-generate/) en la configuración de Nuxt, fichero `nuxt.config.js`.
 
 ```javascript
-import blogsEn from '~/contents/en/blogsEn.js'
-import blogsEs from '~/contents/es/blogsEs.js'
+import blogsEn from '~/contents/en/blogsEn.js';
+import blogsKo from '~/contents/ko/blogsKo.js';
 
 generate: {
-  routes: [
-    '/es', '404'
-  ]
-  .concat(blogsEn.map(blog => `/blog/${blog}`))
-  .concat(blogsEs.map(blog => `es/blog/${blog}`))
+  routes: ['/es', '404']
+    .concat(blogsEn.map((blog) => `/blog/${blog}`))
+    .concat(blogsKo.map((blog) => `es/blog/${blog}`));
 }
 ```
 
@@ -74,7 +73,7 @@ generate: {
 Nuxt tiene una funcionalidad muy interesante y es la creación de [rutas dinámicas](https://nuxtjs.org/guide/routing/#dynamic-routes).
 
 En la siguiente importación vuelvo a utilizar la función `asyncData` en vez de `data` como suele hacerse en Vue, para primero importar cada Markdown y después devolver un nuevo objeto con la información que quiero utilizar en el template de la página.
-**En la importación juego con que la URL es igual al nombre de cada archivo markdown.** 
+**En la importación juego con que la URL es igual al nombre de cada archivo markdown.**
 En el caso de que el archivo md no exista simplemente irá a la página 404.
 
 ```javascript
@@ -105,7 +104,7 @@ El loader para archivos Markdown de Webpack que utilizo es: [frontmatter-markdow
 ¿Recuerdas que antes te he hablado que una de mis motivaciones para crear esta web era tener un blog que tuviera una buena performance?
 Con Nuxt lo he conseguido, y aún me queda bastante por optimizar.
 
-Si has llegado hasta aquí seguramente habrás pensado: *"Vaya percal ha montado Marina, si total podía haber hecho un blog en [Medium](https://medium.com/) y ya está"* y justo ahora vas a entender por qué no me gusta Medium.
+Si has llegado hasta aquí seguramente habrás pensado: _"Vaya percal ha montado Marina, si total podía haber hecho un blog en [Medium](https://medium.com/) y ya está"_ y justo ahora vas a entender por qué no me gusta Medium.
 
 Además de que escribiendo en Medium **no tienes el control sobre tu blog** como CSS, SEO, añadir funcionalidades, el contenido **lo cedes a Medium**, tiene limitación de artículos leídos... encima, **tienen una performance que deja mucho que desear.**
 
@@ -122,7 +121,7 @@ Lo interesante aquí es que con Nuxt he conseguido llegar a un **94%** de perfor
 
 ## Web en dos idiomas
 
-Para traducir la web en inglés y español utilizo [nuxt-i18n](https://github.com/nuxt-community/nuxt-i18n). Es una capa por encima de [vue-i18n](https://github.com/kazupon/vue-i18n) la cual tiene lazy-loading de las traducciones. *Nuxt-i18n* automatiza cómo se trabajan las traducciones en el router de Vue, simplificándolo para Nuxt. Te lo recomiendo por el router, aunque el paquete en sí está un poco verde, la documentación no es la mejor y tiene algunas cosas que no he conseguido que funcionaran como la cookie de redirección en base al idioma del navegador. Pero es un problema que tienes que aceptar si utilizas un nuevo framework como es Nuxt.
+Para traducir la web en inglés y español utilizo [nuxt-i18n](https://github.com/nuxt-community/nuxt-i18n). Es una capa por encima de [vue-i18n](https://github.com/kazupon/vue-i18n) la cual tiene lazy-loading de las traducciones. _Nuxt-i18n_ automatiza cómo se trabajan las traducciones en el router de Vue, simplificándolo para Nuxt. Te lo recomiendo por el router, aunque el paquete en sí está un poco verde, la documentación no es la mejor y tiene algunas cosas que no he conseguido que funcionaran como la cookie de redirección en base al idioma del navegador. Pero es un problema que tienes que aceptar si utilizas un nuevo framework como es Nuxt.
 
 ## Funcionalidades y mejoras que quiero añadir en el futuro
 
@@ -136,7 +135,7 @@ Para traducir la web en inglés y español utilizo [nuxt-i18n](https://github.co
 
 - Limpiar CSS que no utilizo e intentar reducirlo.
 
-- Critico mucho Medium pero en verdad me gusta mucho tanto su diseño como algunas de sus funcionalidades, de hecho me gustaría añadir su famoso botón *"clap"* a mi web.
+- Critico mucho Medium pero en verdad me gusta mucho tanto su diseño como algunas de sus funcionalidades, de hecho me gustaría añadir su famoso botón _"clap"_ a mi web.
 
 - Añadir comentarios al post.
 
@@ -144,7 +143,7 @@ Para traducir la web en inglés y español utilizo [nuxt-i18n](https://github.co
 
 ## Cosas de la web que os contaré otro día
 
-- Lazy loading de componentes e imágenes en Nuxt, te contaré qué paquetes utilizo y el componente propio que hice para renderizar una primera imagen *placeholder* en base64 y después de forma asíncrona la imagen final.
+- Lazy loading de componentes e imágenes en Nuxt, te contaré qué paquetes utilizo y el componente propio que hice para renderizar una primera imagen _placeholder_ en base64 y después de forma asíncrona la imagen final.
 
 - Cómo utilizar `analyze` de Nuxt para analizar el JS que genera Webpack en nuestra app y poder optimizarlo.
 

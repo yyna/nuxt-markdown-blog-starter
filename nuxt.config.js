@@ -215,8 +215,8 @@ module.exports = {
   },
 
   generate: {
-    routes: ['/es', '404']
-      .concat(getPaths('es', 'blog'))
+    routes: ['/ko', '404']
+      .concat(getPaths('ko', 'blog'))
       .concat(getPaths('en', 'blog')),
   },
 };

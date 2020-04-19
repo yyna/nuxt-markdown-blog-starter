@@ -1,6 +1,6 @@
 ---
-name: 'vuex-que-es-cuando-utilizarlo'
-title: Cómo funciona Vuex y cómo lo utilicé mal
+name: 'vuex-what-is-when-use-it'
+title: Vuex 란 무엇인가
 year: 23 Enero 2019
 color: '#edece7'
 isTextColorDark: true
@@ -9,15 +9,17 @@ id: 'vuex-what-when'
 description: |
   Conceptos básicos de Vuex, cómo empeoré la performance de mi web con ello y por qué.
 ---
+
 ## Qué es Vuex
 
 Abreviadamente, [Vuex](https://vuex.vuejs.org/) te permite centralizar información y funciones de la app que son accesibles a través de cualquier componente.
 
 ## Qué problema resuelve
 
-Cuando trabajas con una librería como Vue, la información de los componentes se transporta de componente padre a componente hijo a través de "props" y viceversa a través de emitir un evento que escuchará el padre. Hay algunas veces que necesitas acceder a información de un componente desde otro sin que tengan la relación de padre e hijo. ¿Cómo la vas a obtener entonces? Técnicamente se puede hacer, pero además de ser una movida acabas con lógica de negocio repartida por cualquier componente que seguramente se repita y que en aplicaciones grandes puede ser un drama. Aquí es donde entra la centralización de esa información con herramientras como Vuex (en Vue) o Redux (en React). No solo puedes centralizar información sino también funciones. 
+Cuando trabajas con una librería como Vue, la información de los componentes se transporta de componente padre a componente hijo a través de "props" y viceversa a través de emitir un evento que escuchará el padre. Hay algunas veces que necesitas acceder a información de un componente desde otro sin que tengan la relación de padre e hijo. ¿Cómo la vas a obtener entonces? Técnicamente se puede hacer, pero además de ser una movida acabas con lógica de negocio repartida por cualquier componente que seguramente se repita y que en aplicaciones grandes puede ser un drama. Aquí es donde entra la centralización de esa información con herramientras como Vuex (en Vue) o Redux (en React). No solo puedes centralizar información sino también funciones.
 
 ## La estructura para utilizar Vuex
+
 Vuex se distribuye de la siguiente manera:
 
 - **Estado** (en el código `state`):
@@ -32,14 +34,14 @@ Vuex se distribuye de la siguiente manera:
 - **Acciones** (en el código `actions`):
   - Son funciones.
   - Poseen la lógica de negocio.
-  - Para cambiar el estado deben de llamar a mutaciones a través de *commit*.
-  - Pueden llamar otras acciones a través de *dispatch*. 
-  - La forma de inicializarse en el componente es a través de *dispatch* o utilizando modulos.
+  - Para cambiar el estado deben de llamar a mutaciones a través de _commit_.
+  - Pueden llamar otras acciones a través de _dispatch_.
+  - La forma de inicializarse en el componente es a través de _dispatch_ o utilizando modulos.
   - Son asíncronas.
 - **Getters** (en el código `getters`).
   - Son funciones.
   - No cambian el estado pero sí que lo formatean para que podemos utilizar esa información de la manera que la necesitemos.
-  - Sería lo más parecido a una propiedad *computed* en el componente. 
+  - Sería lo más parecido a una propiedad _computed_ en el componente.
   - Un ejemplo sería una función que filtrara el estado. No lo modifica pero te devuelve un nuevo objeto diferente con los datos filtrados que necesitas.
 
 ## Cómo y por qué yo lo utilicé mal
