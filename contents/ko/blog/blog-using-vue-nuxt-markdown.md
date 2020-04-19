@@ -5,6 +5,7 @@ year: 1 Mar 2019
 color: '#8e7964'
 trans: 'blog-using-vue-nuxt-markdown'
 id: 'vue-nuxt-blog'
+category: 'kubernetes'
 description: |
   내가 Nuxt 로 웹사이트를 다시 만든 이유에 대해서 알아보자
 ---

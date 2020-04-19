@@ -6,6 +6,7 @@ color: '#edece7'
 isTextColorDark: true
 trans: 'vuex-what-is-when-use-it'
 id: 'vuex-what-when'
+category: 'book-review'
 description: |
   Conceptos básicos de Vuex, cómo empeoré la performance de mi web con ello y por qué.
 ---

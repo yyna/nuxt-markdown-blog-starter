@@ -6,6 +6,7 @@ color: '#edece7'
 isTextColorDark: true
 trans: 'vuex-what-is-when-use-it'
 id: 'vuex-what-when'
+category: 'git'
 description: |
   Vuex basics, how I make my website's performance worse using it and why
 ---

@@ -10,6 +10,7 @@
         :height="'509'"
         :alt="blog.cardAlt"
       />
+      <div class="blog__category">{ {{ blog.category }} }</div>
       <h3 class="blog__title">
         {{ blog.title }}
       </h3>
@@ -53,10 +54,14 @@ export default {
     }
   }
 
+  &__category {
+    margin-top: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
   &__title {
     font-family: 'Tiempos Headline', 'Gothic A1', Arial, sans-serif;
     color: $secondary;
-    padding-top: 1rem;
     font-size: 2.5rem;
     transition: color 0.3s;
   }

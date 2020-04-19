@@ -1,13 +1,28 @@
 <template>
   <div class="blog-index">
     <div class="container">
-      <BlogSection :blogs="blogs" />
+      <div class="blogs__top">
+        <div>
+          <h2>{{ $t('posts') }}</h2>
+          <span class="emoji-title emoji--writing" />
+        </div>
+      </div>
+      <Category
+        v-for="(count, category) in categories"
+        :key="category"
+        :category="category"
+        :count="count"
+        :click="changeCategory"
+        :class="{ active: selected === category }"
+      />
+      <BlogSection :blogs="filteredBlogs" />
     </div>
   </div>
 </template>
 
 <script>
 import BlogSection from '~/components/Sections/BlogSection';
+import Category from '~/components/Category';
 
 import blogsEn from '~/contents/en/blogsEn.js';
 import blogsKo from '~/contents/ko/blogsKo.js';
@@ -24,13 +39,22 @@ export default {
     }
 
     return Promise.all(blogs.map((blog) => asyncImport(blog))).then((res) => {
+      const categories = {};
+      res.forEach((res) => {
+        if (res.category in categories) {
+          categories[res.category] += 1;
+        } else {
+          categories[res.category] = 1;
+        }
+      });
       return {
         blogs: res,
+        categories,
       };
     });
   },
 
-  components: { BlogSection },
+  components: { BlogSection, Category },
 
   transition: {
     name: 'slide-fade',
@@ -67,6 +91,25 @@ export default {
   computed: {
     ogImage: function() {
       return;
+    },
+    filteredBlogs() {
+      return this.selected === undefined
+        ? this.blogs
+        : this.blogs.filter((blog) => {
+            return blog.category === this.selected;
+          });
+    },
+  },
+
+  data() {
+    return {
+      selected: undefined,
+    };
+  },
+
+  methods: {
+    changeCategory(category) {
+      this.selected = this.selected === category ? undefined : category;
     },
   },
 };

@@ -8,6 +8,7 @@ isTextColorDark: true
 noMainImage: true
 extraComponent: 'Datatable'
 id: 'design-and-code-skeletons-screens'
+category: 'docker'
 description: |
   You will learn how to design a Skeleton Screen thinking about its asynchronometry and how to code it based on Sketch or Photoshop opacity modes.
 ---
@@ -34,6 +35,7 @@ It's a real example that I made for a [Holaluz](https://www.holaluz.com/en/)'s p
 To start the design you need to know which content will be asynchronous and which content won't be, so it will be synchronous. If you just take care of the design part or you just landed on the project, you'll have to ask your front-end colleagues what content the API is sending and most importantly: what content you already know you're going to show anyways.
 
 In this case, I as an UX Engineer in this project (work in design and development), I already had this information and could distinguish between:
+
 - <strong>Synchronous content:</strong> the structure of the table with its titles, which has 3 columns and I knew their height.
 - <strong>Asynchronous content:</strong> the content of each row that the API will return as an object. Each row is divided into 3 columns.
 
@@ -130,7 +132,7 @@ Result:
   opacity: 0;
 
   &:nth-child(2) {
-    animation-delay: .5s;
+    animation-delay: 0.5s;
   }
 
   &:nth-child(3) {
@@ -178,7 +180,7 @@ We will apply an `:before` to `datagrid__row` with an absolute position so it wi
 }
 
 .datagrid__row:before {
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 100%;
@@ -186,12 +188,7 @@ We will apply an `:before` to `datagrid__row` with an absolute position so it wi
   animation-duration: 3.5s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  background: linear-gradient(
-    to right,
-    #cccccc 2%,
-    #666666 18%,
-    #cccccc 33%
-  );
+  background: linear-gradient(to right, #cccccc 2%, #666666 18%, #cccccc 33%);
   background-size: 50%;
 }
 ```
@@ -207,6 +204,7 @@ Finally we apply the `mix-blend-mode: overlay` and magically we will get the ver
   mix-blend-mode: overlay;
 }
 ```
+
 Result:
 
 <Component :is="extraComponentLoader" />

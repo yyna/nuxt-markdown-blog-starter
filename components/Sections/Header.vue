@@ -10,7 +10,7 @@
 
         <!-- navigation -->
         <div class="navigation-items">
-          <nuxt-link to="/blog" class="ani">blog</nuxt-link>
+          <nuxt-link to="/blog" :class="{ ani: true, active }">blog</nuxt-link>
           <LangSwitcher class="lang-switcher" />
         </div>
 
@@ -28,6 +28,12 @@ import LangSwitcher from '~/components/LangSwitcher';
 
 export default {
   components: { LangSwitcher },
+
+  computed: {
+    active() {
+      return ['blog___en', 'blog___ko'].includes(this.$route.name);
+    },
+  },
 };
 </script>
 
@@ -83,6 +89,7 @@ export default {
 
       &:hover,
       &.nuxt-link-active,
+      &.active,
       &:focus {
         color: $text-negative !important;
         transition: all 0.4s;

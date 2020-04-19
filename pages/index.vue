@@ -12,6 +12,6 @@ export default {};
 
 <style lang="scss">
 .page-index {
-  padding: 4rem;
+  padding: 4rem 0;
 }
 </style>

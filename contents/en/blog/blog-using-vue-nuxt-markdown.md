@@ -5,6 +5,7 @@ year: 1 January 2019
 color: '#8e7964'
 trans: 'blog-using-vue-nuxt-markdown'
 id: 'vue-nuxt-blog'
+category: 'docker'
 description: |
   How I created my new website with portfolio and blog in two languages. What technology I used and why.
 ---

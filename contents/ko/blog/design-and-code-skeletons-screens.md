@@ -8,6 +8,7 @@ isTextColorDark: true
 noMainImage: true
 extraComponent: 'Datatable'
 id: 'design-and-code-skeletons-screens'
+category: 'javascript'
 description: |
   Aprenderás a diseñar un Skeleton Screen pensando en su asincronometría y programarlo en base a modos de opacidad de Sketch o Photoshop.
 ---
