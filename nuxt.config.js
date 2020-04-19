@@ -35,7 +35,7 @@ module.exports = {
     productionUrl,
   },
   head: {
-    title: 'Jungin Kwon | Server Developer',
+    title: 'Jungin Kwon - Server Developer',
     meta: [
       { charset: 'utf-8' },
       {
