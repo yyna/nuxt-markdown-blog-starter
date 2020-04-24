@@ -27,7 +27,7 @@ const productionUrl = {
   en: '/en',
   es: '/es',
 };
-const baseUrl = 'https://marinaaisa.com';
+const baseUrl = 'https://yyna.dev';
 
 module.exports = {
   env: {
@@ -35,7 +35,7 @@ module.exports = {
     productionUrl,
   },
   head: {
-    title: 'Jungin Kwon - Server Developer',
+    title: '{ yyna.dev }',
     meta: [
       { charset: 'utf-8' },
       {
@@ -196,6 +196,23 @@ module.exports = {
     '@nuxtjs/style-resources',
     ['nuxt-i18n', I18N],
     'nuxt-webfontloader',
+    ['nuxt-fontawesome', {
+      component: 'fa', 
+      imports: [
+        {
+          set: '@fortawesome/free-solid-svg-icons',
+          icons: ['fas']
+        },
+        {
+          set: '@fortawesome/free-brands-svg-icons',
+          icons: ['fab']
+        },
+        {
+          set: '@fortawesome/free-regular-svg-icons',
+          icons: ['far']
+        }
+      ]
+    }]
   ],
 
   styleResources: {

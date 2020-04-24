@@ -3,20 +3,20 @@
     <div class="header">
       <div class="container header-container">
         <div class="header__home">
-          <nuxt-link to="/" class="home">
+          <nuxt-link :to="localePath('index')" class="home">
             { yyna.dev }
           </nuxt-link>
         </div>
 
         <!-- navigation -->
         <div class="navigation-items">
-          <nuxt-link to="/blog" :class="{ ani: true, active }">blog</nuxt-link>
+          <nuxt-link :to="localePath('blog')" :class="{ ani: true, active }">blog</nuxt-link>
           <LangSwitcher class="lang-switcher" />
         </div>
 
         <!-- toggle menu -->
         <div class="drop-toggle-button">
-          <div>Menu</div>
+          <SideNav />
         </div>
       </div>
     </div>
@@ -25,9 +25,10 @@
 
 <script>
 import LangSwitcher from '~/components/LangSwitcher';
+import SideNav from '~/components/SideNav';
 
 export default {
-  components: { LangSwitcher },
+  components: { LangSwitcher, SideNav },
 
   computed: {
     active() {
@@ -51,7 +52,6 @@ export default {
   &-container {
     display: flex;
     justify-content: space-between;
-    // width: 100%;
 
     @media (min-width: $screen-sm) {
       flex-direction: row;
