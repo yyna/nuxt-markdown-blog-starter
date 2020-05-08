@@ -9,4 +9,5 @@ export default {
   posts: 'Posts',
   home: 'Home',
   footer: footer,
+  hereIsWhereILearnt: 'Here is where I learnt',
 };

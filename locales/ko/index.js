@@ -9,4 +9,5 @@ export default {
   posts: 'Posts',
   home: 'Home',
   footer: footer,
+  hereIsWhereILearnt: '이 회사에서 새롭게 배운 것',
 };
