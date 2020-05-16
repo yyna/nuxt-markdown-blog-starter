@@ -43,7 +43,7 @@
           </div>
         </div>
         <ImageResponsive
-          :imageURL="'blog/' + id + '/_main.jpg'"
+          :imageURL="'blog/' + id + '/_thumbnail.png'"
           v-if="!noMainImage"
           width="100%"
           class="elevate-cover__img"
@@ -63,6 +63,15 @@
           :static-render-funcs="staticRenderFuncs"
           :extra-component="extraComponent"
         />
+      </client-only>
+    </div>
+    <div class="container small">
+      <client-only>
+        <vue-disqus
+          shortname="yyna-dev"
+          :identifier="id"
+          :url="disqusUrl"
+        ></vue-disqus>
       </client-only>
     </div>
   </div>
@@ -129,7 +138,7 @@ export default {
 
   computed: {
     ogImage () {
-      return `${process.env.baseUrl}/images/blog/${this.id}/_thumbnail.jpg`;
+      return `${process.env.baseUrl}/images/blog/${this.id}/_thumbnail.png`;
     },
     pageTitle () {
       return this.title + ' – Jungin Kwon';
@@ -147,6 +156,9 @@ export default {
         href: `${process.env.baseUrl + (this.showLocales[0].code === 'en' ? '' : '/es')}/blog/${this.trans}`,
         hreflang: this.showLocales[0].code
       }
+    },
+    disqusUrl() {
+      return this.$i18n.locale === 'ko' ? `https://yyna.dev/blog/${this.id}` : `https://yyna.dev/blog/en/${this.id}`
     },
 
     extraComponentLoader () {

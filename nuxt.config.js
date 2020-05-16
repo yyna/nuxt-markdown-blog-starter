@@ -191,28 +191,32 @@ module.exports = {
     '~/plugins/lazyload',
     '~/plugins/globalComponents',
     { src: '~plugins/ga.js', ssr: false },
+    '~plugins/disqus.js',
   ],
   modules: [
     '@nuxtjs/style-resources',
     ['nuxt-i18n', I18N],
     'nuxt-webfontloader',
-    ['nuxt-fontawesome', {
-      component: 'fa', 
-      imports: [
-        {
-          set: '@fortawesome/free-solid-svg-icons',
-          icons: ['fas']
-        },
-        {
-          set: '@fortawesome/free-brands-svg-icons',
-          icons: ['fab']
-        },
-        {
-          set: '@fortawesome/free-regular-svg-icons',
-          icons: ['far']
-        }
-      ]
-    }]
+    [
+      'nuxt-fontawesome',
+      {
+        component: 'fa',
+        imports: [
+          {
+            set: '@fortawesome/free-solid-svg-icons',
+            icons: ['fas'],
+          },
+          {
+            set: '@fortawesome/free-brands-svg-icons',
+            icons: ['fab'],
+          },
+          {
+            set: '@fortawesome/free-regular-svg-icons',
+            icons: ['far'],
+          },
+        ],
+      },
+    ],
   ],
 
   styleResources: {

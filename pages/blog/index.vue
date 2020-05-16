@@ -1,12 +1,7 @@
 <template>
   <div class="blog-index">
     <div class="container">
-      <div class="blogs__top">
-        <div>
-          <h2>{{ $t('posts') }}</h2>
-          <span class="emoji-title emoji--writing" />
-        </div>
-      </div>
+      <div class="blogs__top"></div>
       <Category
         v-for="(count, category) in categories"
         :key="category"

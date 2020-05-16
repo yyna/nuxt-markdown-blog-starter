@@ -1,5 +1,7 @@
 export default [
-  'blog-using-vue-nuxt-markdown',
-  'vuex-what-is-when-use-it',
-  'design-and-code-skeletons-screens',
+  // 'blog-using-vue-nuxt-markdown',
+  // 'vuex-what-is-when-use-it',
+  // 'design-and-code-skeletons-screens',
+  'building-rest-api-using-fastify-typescript-typeorm-2',
+  'building-rest-api-using-fastify-typescript-typeorm-1',
 ];
