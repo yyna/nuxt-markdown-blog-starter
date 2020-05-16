@@ -10,4 +10,5 @@ export default {
   home: 'Home',
   footer: footer,
   hereIsWhereILearnt: '이 회사에서 새롭게 배운 것',
+  atTheMomentIAmLearning: '이 회사에서 새롭게 공부하고 있는 것',
 };

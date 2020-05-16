@@ -29,7 +29,9 @@
       {{ description }}
     </p>
     <p>
-      {{ $t('hereIsWhereILearnt') }}: <b>{{ work.technologyStacks }}</b>
+      {{
+        work.working ? $t('atTheMomentIAmLearning') : $t('hereIsWhereILearnt')
+      }}: <b>{{ work.technologyStacks }}</b>
     </p>
   </div>
 </template>

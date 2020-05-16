@@ -10,4 +10,5 @@ export default {
   home: 'Home',
   footer: footer,
   hereIsWhereILearnt: 'Here is where I learnt',
+  atTheMomentIAmLearning: 'At the moment, I am learning',
 };
