@@ -50,7 +50,7 @@ description: |
 
    위 명령어를 입력하면 tsconfig.json 이라는 파일이 생깁니다. Model 작성을 위해 아래 표시된 두 옵션만 변경해줍니다.
 
-   ```JSON
+   ```javascript
    {
        "strictPropertyInitialization": false,
        "experimentalDecorators": true
@@ -63,7 +63,7 @@ description: |
 
 4. package.json 에 start script 추가하기
 
-   ```JSON
+   ```javascript
    {
        "scripts": {
             "start": "ts-node --files ./src/index.ts"
@@ -73,26 +73,26 @@ description: |
 
 ### fastify 인스턴스 (서버) 실행
 
-```TypeScript
+```javascript
 // src/index.ts
-import fastify from 'fastify'
-import { Server, IncomingMessage, ServerResponse } from 'http'
+import fastify from 'fastify';
+import { Server, IncomingMessage, ServerResponse } from 'http';
 
-const PORT = process.env.PORT || '3000'
+const PORT = process.env.PORT || '3000';
 const server: fastify.FastifyInstance<
-    Server,
-    IncomingMessage,
-    ServerResponse
-> = fastify({ logger: true })
+  Server,
+  IncomingMessage,
+  ServerResponse
+> = fastify({ logger: true });
 
 // test code
 server.get('/', async (request, reply) => {
-    return { hello: 'world' }
-})
+  return { hello: 'world' };
+});
 
 server.listen(+PORT, '0.0.0.0', (err) => {
-    if (err) throw err
-})
+  if (err) throw err;
+});
 ```
 
 npm start 를 통해 src/index.ts 를 실행 후 브라우저로 localhost:3000 에 들어가보면 아래와 같이 잘 작동합니다.
@@ -102,7 +102,7 @@ npm start 를 통해 src/index.ts 를 실행 후 브라우저로 localhost:3000 
 
 1. Memo 모델 생성하기
 
-   ```typescript
+   ```javascript
    // src/modules/memo/entity.ts
    import {
      CreateDateColumn,
@@ -134,7 +134,7 @@ npm start 를 통해 src/index.ts 를 실행 후 브라우저로 localhost:3000 
 2. 데이터베이스 연결 decorator 생성  
     fastify 인스턴스에 새로운 property 를 추가하는 decorate 라는 API가 있습니다. 자세한 설명은 [https://www.fastify.io/docs/v1.14.x/Decorators/](https://www.fastify.io/docs/v1.14.x/Decorators/) 를 참고해주세요.
 
-   ```typescript
+   ```javascript
    // src/decorators/db.ts
    import fp from 'fastify-plugin';
    import { createConnection, getConnectionOptions } from 'typeorm';
@@ -158,7 +158,7 @@ npm start 를 통해 src/index.ts 를 실행 후 브라우저로 localhost:3000 
 
 3. fastify 인스턴스에 'db' decorator 추가
 
-```typescript
+```javascript
 import fastify from 'fastify';
 import { Server, IncomingMessage, ServerResponse } from 'http';
 
@@ -229,7 +229,7 @@ server.listen(+PORT, '0.0.0.0', (err) => {
 5) User 모델 생성하기  
    위의 Memo 모델에는 Memo 를 소유한 사용자 정보가 없습니다. 사용자 모델을 추가해봅시다.
 
-   ```typescript
+   ```javascript
    // modules/user/entity.ts
    import {
      CreateDateColumn,
@@ -260,7 +260,7 @@ server.listen(+PORT, '0.0.0.0', (err) => {
 
    db 데코레이터에 memo repository 를 추가했던 것과 같은 방법으로 user repository 도 추가합니다.
 
-   ```typescript
+   ```javascript
    import fp from 'fastify-plugin';
    import { createConnection, getConnectionOptions } from 'typeorm';
    import { Memo } from '../modules/memo/entity';
@@ -283,7 +283,7 @@ server.listen(+PORT, '0.0.0.0', (err) => {
 
    그리고 Memo 모델에 (메모를 소유한) 사용자 정보를 추가합니다.
 
-   ```typescript
+   ```javascript
    // src/modules/memo/entity.ts
    import {
      CreateDateColumn,

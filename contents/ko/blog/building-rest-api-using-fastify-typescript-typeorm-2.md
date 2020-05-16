@@ -16,7 +16,7 @@ description: |
 
 1.  /memo route 추가하기
 
-    ```typescript
+    ```javascript
     // src/modules/router.ts
     import fp from 'fastify-plugin';
 
@@ -49,7 +49,7 @@ description: |
 
     이제 { hello: 'world' } 를 응답하는 test code 를 지우고 route 를 추가해봅시다. decorator 를 등록하는 방법과 동일힙니다.
 
-    ```typescript
+    ```javascript
     // src/index.ts
     import fastify from 'fastify';
     import { Server, IncomingMessage, ServerResponse } from 'http';
@@ -104,7 +104,7 @@ description: |
 3.  /user route 추가
     memo route 를 추가한 것과 같은 방법으로 user route 도 추가합니다.
 
-    ```typescript
+    ```javascript
     // src/index.ts
     import fastify from 'fastify';
     import { Server, IncomingMessage, ServerResponse } from 'http';
@@ -147,7 +147,7 @@ description: |
 1.  auth middleware 추가하기
     memo route 에 인증된 사용자만 접근할 수 있도록 middleware 를 추가합니다. JWT를 사용합니다.
 
-    ```typescript
+    ```javascript
     // src/middlewares/auth.ts
     import fp from 'fastify-plugin';
     import jwt from 'fastify-jwt';
@@ -170,7 +170,7 @@ description: |
 
     fastify 인스턴스에 추가합니다.
 
-    ```typescript
+    ```javascript
     // src/index.ts
     import fastify from 'fastify';
     import { Server, IncomingMessage, ServerResponse } from 'http';
@@ -202,7 +202,7 @@ description: |
 2.  FastifyInstance interface 에 property 추가하기  
     fastify 인스턴스에 db, auth, jwt decorator 를 추가했지만 FastifyInstance interface 에는 해당 property 가 없기때문에 사용을 위해 interface 변경이 필요합니다.
 
-    ```typescript
+    ```javascript
     // src/@types/fastify/index.d.ts
     import { Server, IncomingMessage, ServerResponse } from 'http';
     import { Repository } from 'typeorm';
@@ -232,7 +232,7 @@ description: |
 
 1.  로그인/회원가입 handler 작성하기
 
-    ```typescript
+    ```javascript
     // src/modules/user/router.ts
     import fp from 'fastify-plugin';
     import bcrypt from 'bcrypt';
@@ -304,7 +304,7 @@ description: |
 2.  메모 CRUD handler 작성하기  
     메모 handler 는 사용자 handler 와 다르게 preValidation 옵션을 사용합니다. 인증된 사용자만 접근할 수 있기 때문입니다. preValidation 으로 추가된 auth middleware 를 거쳐 request.user 에 사용자 정보가 담긴 채로 handler 에 전달 됩니다.
 
-    ```typescript
+    ```javascript
     // src/modules/memo/router.ts
     // ....
 
@@ -329,7 +329,7 @@ description: |
 3.  global 에러 핸들러 추가
     모든 에러를 한 곳에서 처리하기 위해 handler 에서 에러를 처리하지 않았습니다.
 
-    ```typescript
+    ```javascript
     // src/index.ts
     // ...
     server.setErrorHandler((error, request, reply) => {
