@@ -39,7 +39,7 @@ description: |
    - typeorm
    - bcrypt: 회원가입/로그인 기능 구현 시 비밀번호 암호화에 사용합니다.
    ```
-   npm install --save-dev @types/bcrypt @types/node typescript
+   npm install --save-dev @types/bcrypt @types/node typescript ts-node
    ```
    - typescript 사용을 위한 패키지 설치
 3. 타입스크립트 설정 파일 생성
@@ -95,7 +95,7 @@ server.listen(+PORT, '0.0.0.0', (err) => {
 });
 ```
 
-npm start 를 통해 src/index.ts 를 실행 후 브라우저로 localhost:3000 에 들어가보면 아래와 같이 잘 작동합니다.
+`npm start` 를 통해 src/index.ts 를 실행 후 브라우저로 localhost:3000 에 들어가보면 아래와 같이 잘 작동합니다.
 <image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-1/1.png" width="100%" alt="src/index.ts"/>
 
 ### 모델 생성
@@ -223,7 +223,7 @@ server.listen(+PORT, '0.0.0.0', (err) => {
 
    저는 docker-compose 를 사용하여 데이터베이스를 실행했습니다. 로컬에서 직접 실행해도 상관없습니다.
 
-   npm start 를 통해 다시 서버를 실행합니다. localhost 에서 실행중인 PostgreSQL에 memo 라는 테이블이 생겼습니다. 성공적으로 작동하네요. 👏👏👏
+   `npm start` 를 통해 다시 서버를 실행합니다. localhost 에서 실행중인 PostgreSQL에 memo 라는 테이블이 생겼습니다. 성공적으로 작동하네요. 👏👏👏
    <image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-1/2.png" width="100%" alt="memo table"/>
 
 5) User 모델 생성하기  
@@ -318,6 +318,6 @@ server.listen(+PORT, '0.0.0.0', (err) => {
    }
    ```
 
-   다시 npm start 를 해보면 user table 이 성공적으로 생성되었고 memo table 에 user_id 가 추가되었습니다!!!!
+   다시 `npm start` 를 해보면 user table 이 성공적으로 생성되었고 memo table 에 user_id 가 추가되었습니다!!!!
    <image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-1/3.png" width="100%" alt="memo table 2"/>
    <image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-1/4.png" width="100%" alt="user table"/>

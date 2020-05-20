@@ -8,7 +8,7 @@ import mip from 'markdown-it-prism';
 
 function getPaths(lang, type) {
   let initial = lang;
-  if (lang === 'en') {
+  if (lang === 'ko') {
     initial = '';
   }
   return fs
@@ -236,7 +236,7 @@ module.exports = {
   },
 
   generate: {
-    routes: ['/ko', '404']
+    routes: ['/', '404']
       .concat(getPaths('ko', 'blog'))
       .concat(getPaths('en', 'blog')),
   },

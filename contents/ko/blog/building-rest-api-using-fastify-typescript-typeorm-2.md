@@ -45,7 +45,7 @@ description: |
     });
     ```
 
-    fastify 인스턴스에 바로 Routes 를 추가할 수 있습니다. 자세한 내용은 https://www.fastify.io/docs/latest/Routes/ 를 참조해주세요.
+    fastify 인스턴스에 바로 Routes 를 추가할 수 있습니다. 자세한 내용은 [https://www.fastify.io/docs/latest/Routes/](https://www.fastify.io/docs/latest/Routes/) 를 참조해주세요.
 
     이제 { hello: 'world' } 를 응답하는 test code 를 지우고 route 를 추가해봅시다. decorator 를 등록하는 방법과 동일힙니다.
 
@@ -74,7 +74,7 @@ description: |
 
 2.  http request 만들기  
     테스트를 위해 VSCode extension 을 사용해서 http request 를 테스트해봅시다. Postman 으로 고통받고 있는 저를 보고 옆자리 개발자분이 추천해주셨는데 엄청 편리하더라구요.
-    https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+    [https://marketplace.visualstudio.com/items?itemName=humao.rest-client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 
     memo.http 파일을 생성
 
@@ -101,7 +101,7 @@ description: |
     <image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-2/1.png" width="100%" alt="memo http"/>
     `Send Request` 텍스트를 눌러 바로 http request 생성이 가능합니다. 물론 서버가 실행중이어야 합니다. 5가지 request 모두 성공적으로 response 가 오네요. 💃🏻🕺🏻💃🏻🕺🏻
 
-3.  /user route 추가
+3.  /user route 추가  
     memo route 를 추가한 것과 같은 방법으로 user route 도 추가합니다.
 
     ```javascript

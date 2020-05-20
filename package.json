@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "frontmatter-markdown-loader": "^3.1.0",
-    "node-sass": "^4.14.0",
+    "node-sass": "^4.14.1",
     "responsive-loader": "^1.2.0",
     "sass-loader": "^8.0.0",
     "sharp": "^0.23.4"

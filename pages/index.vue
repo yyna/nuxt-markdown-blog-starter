@@ -56,25 +56,6 @@ export default {
       works: [
         {
           name: {
-            en: 'Miso',
-            ko: '미소',
-          },
-          period: 'May, 2020 - Present',
-          position: 'Back-end Developer',
-          description: {
-            en:
-              'Miso is Korea\'s No. 1 home service company that provides all necessary services for daily life, from domestic help to moving to interior. I am working as a backend developer.',
-            ko:
-              '미소는 가사도우미부터 이사, 인테리어까지 생활에 필요한 모든 서비스를 제공하는 대한민국 1등 홈서비스 회사입니다. 이 회사에 새롭게 백엔드 개발자로 합류했습니다.',
-          },
-          technologyStacks: 'Fastify, Kubernetes, PostgreSQL, Unit Testing',
-          homepage: 'https://miso.kr',
-          android: 'https://play.google.com/store/apps/details?id=com.miso&hl=ko',
-          ios: 'https://apps.apple.com/kr/app/%EB%AF%B8%EC%86%8C/id1071778654',
-          working: true,
-        },
-        {
-          name: {
             en: 'Choreofactory',
             ko: '안무공장',
           },

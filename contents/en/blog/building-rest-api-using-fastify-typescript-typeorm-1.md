@@ -2,27 +2,27 @@
 name: 'building-rest-api-using-fastify-typescript-typeorm-1'
 trans: 'building-rest-api-using-fastify-typescript-typeorm-1'
 id: 'building-rest-api-using-fastify-typescript-typeorm-1'
-title: fastify.js, typeORM, typescript 를 이용한 RESTful API 만들기 - (1) 프로젝트 설정, 모델 생성
+title: Building RESTful API using fastify.js, typeORM, typescript - (1) Project settings, Identify Object Model
 year: 17 May 2020
 isTextColorDark: true
 category: 'fastify'
 description: |
-  프로젝트 설정과 모델 생성을 해봅시다.
+  Let's set up the project and identify the object model.
 ---
 
-## 뭘 만드나
+## What to make
 
-월요일부터 출근한 새 직장에서 fastify.js 와 PostgreSQL 를 사용하고 있어서 공부를 위해 간단한 프로젝트를 만들어보려 합니다. 🤓
+I'm using fastify.js and PostgreSQL in my new job, which I started on Monday, so I want to create a simple project for my study. 🤓
 
-인증된 사용자만 메모를 Create, Read, Update, Delete 할 수 있고 메모를 Create 한 사용자만 해당 메모를 Read, Update, Delete 하는 RESTful API 를 작성해봅시다.
+Let's write a RESTful API that allows only authenticated users to create, read, update, and delete notes, and only those who have created notes can read, update, and delete them.
 
-사용자(User) Model 이 있고 메모(Memo) 모델은 사용자에게 속하는 Memo belongs to User 관계를 가지게 됩니다.
+There is a User Model and the Memo model has a relationship belonging to the user.
 
-프로젝트에 사용된 코드는 [github](https://github.com/yyna/fastify-typescript-typeorm) 에서 확인 가능합니다.
+The code used in the project can be found on [github](https://github.com/yyna/fastify-typescript-typeorm).
 
-## 만들어 봅시다
+## Let's make it
 
-### 프로젝트 설정
+### Project settings
 
 1. initialize npm project
    ```
@@ -34,21 +34,21 @@ description: |
    ```
    - fastify
    - fastify-plugin
-   - fastify-jwt: JWT 토큰을 이용한 인증을 구현하기 위해 사용합니다.
-   - pg: PostgreSQL 클라이언트
+   - fastify-jwt: Used to implement authentication using JWT tokens.
+   - pg: PostgreSQL Client
    - typeorm
-   - bcrypt: 회원가입/로그인 기능 구현 시 비밀번호 암호화에 사용합니다.
+   - bcrypt: Used for password encryption when implementing the user registration / login function.
    ```
-   npm install --save-dev @types/bcrypt @types/node typescript
+   npm install --save-dev @types/bcrypt @types/node typescript ts-node
    ```
-   - typescript 사용을 위한 패키지 설치
-3. 타입스크립트 설정 파일 생성
+   - Install package to use typescript
+3. Creating a typescript configuration file
 
    ```
    npx tsc --init
    ```
 
-   위 명령어를 입력하면 tsconfig.json 이라는 파일이 생깁니다. Model 작성을 위해 아래 표시된 두 옵션만 변경해줍니다.
+   If you enter the above command, you will get a file called tsconfig.json. For model creation, change only the two options shown below.
 
    ```javascript
    {
@@ -57,11 +57,11 @@ description: |
    }
    ```
 
-   - experimentalDecorators: ES7 에서 추가된 decorator 를 사용하기 위해 true 로 변경해줍니다.  
-     [ES7 decorator 에 관해 참조할만한 블로그](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841)
-   - strictPropertyInitialization: 모델 클래스에선 property에 값을 초기화하지 않기 때문에 false 로 변경해줍니다.
+   - experimentalDecorators: Change to true to use the decorator added in ES7.
+     [Blogs to reference about the ES7 decorator](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841)
+   - strictPropertyInitialization: In the model class, we don't initialize the value of the property, so change it to false.
 
-4. package.json 에 start script 추가하기
+4. Add start script to package.json
 
    ```javascript
    {
@@ -71,7 +71,7 @@ description: |
    }
    ```
 
-### fastify 인스턴스 (서버) 실행
+### Run fastify instance (server)
 
 ```javascript
 // src/index.ts
@@ -95,12 +95,12 @@ server.listen(+PORT, '0.0.0.0', (err) => {
 });
 ```
 
-npm start 를 통해 src/index.ts 를 실행 후 브라우저로 localhost:3000 에 들어가보면 아래와 같이 잘 작동합니다.
+After running src/index.ts through `npm start` and entering localhost:3000 with a browser, it works fine as shown below.
 <image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-1/1.png" width="100%" alt="src/index.ts"/>
 
-### 모델 생성
+### Identify Object Model
 
-1. Memo 모델 생성하기
+1. Memo model
 
    ```javascript
    // src/modules/memo/entity.ts
@@ -131,8 +131,8 @@ npm start 를 통해 src/index.ts 를 실행 후 브라우저로 localhost:3000 
    }
    ```
 
-2. 데이터베이스 연결 decorator 생성  
-    fastify 인스턴스에 새로운 property 를 추가하는 decorate 라는 API가 있습니다. 자세한 설명은 [https://www.fastify.io/docs/v1.14.x/Decorators/](https://www.fastify.io/docs/v1.14.x/Decorators/) 를 참고해주세요.
+2. Create database connection decorator
+   There is an API called decorate that adds new properties to the fastify instance. Please refer to the [link](https://www.fastify.io/docs/v1.14.x/Decorators/) for details.
 
    ```javascript
    // src/decorators/db.ts
@@ -154,15 +154,15 @@ npm start 를 통해 src/index.ts 를 실행 후 브라우저로 localhost:3000 
    });
    ```
 
-   memo repository를 포함한 'db' decorator 를 생성합니다.
+   Create 'db' decorator including memo repository.
 
-3. fastify 인스턴스에 'db' decorator 추가
+3. Add 'db' decorator to fastify instance
 
 ```javascript
 import fastify from 'fastify';
 import { Server, IncomingMessage, ServerResponse } from 'http';
 
-import db from './decorators/db'; // 추가된 부분 ✨
+import db from './decorators/db'; // Added part ✨
 
 const PORT = process.env.PORT || '3000';
 const server: fastify.FastifyInstance<
@@ -176,15 +176,15 @@ server.get('/', async (request, reply) => {
   return { hello: 'world' };
 });
 
-server.register(db); // 추가된 부분 ✨
+server.register(db); // Added part ✨
 
 server.listen(+PORT, '0.0.0.0', (err) => {
   if (err) throw err;
 });
 ```
 
-4. 데이터베이스 연결하기  
-    TypeORM 에 PostgreSQL 을 연결하기 위한 설정을 해봅시다. 여러 방법으로 설정이 가능합니다. 저는 .env 를 통해 설정하는 방법을 사용하려고 합니다. 더 많은 방법은 https://github.com/typeorm/typeorm/blob/master/docs/using-ormconfig.md 링크를 참조해주세요.
+4. Connecting to the database
+   Let's set up to connect PostgreSQL to TypeORM. It can be set in several ways. I'm trying to use a method set via .env. See the [link](https://github.com/typeorm/typeorm/blob/master/docs/using-ormconfig.md) for more ways.
 
    ```
    // .env
@@ -198,7 +198,7 @@ server.listen(+PORT, '0.0.0.0', (err) => {
    TYPEORM_ENTITIES=src/modules/*/entity.ts
    ```
 
-   설정을 보면 알 수 있듯이 localhost 에 postgres 가 실행중이어야 합니다.
+   As you can see from the configuration, postgres must be running on localhost.
 
    ```yaml
    # docker-compose.yml
@@ -221,13 +221,13 @@ server.listen(+PORT, '0.0.0.0', (err) => {
    docker-compose up
    ```
 
-   저는 docker-compose 를 사용하여 데이터베이스를 실행했습니다. 로컬에서 직접 실행해도 상관없습니다.
+   I ran the database using docker-compose. You can run it directly locally.
 
-   npm start 를 통해 다시 서버를 실행합니다. localhost 에서 실행중인 PostgreSQL에 memo 라는 테이블이 생겼습니다. 성공적으로 작동하네요. 👏👏👏
+   Run the server again via `npm start`. I have a table called memo in PostgreSQL running on localhost. It works successfully. 👏👏👏
    <image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-1/2.png" width="100%" alt="memo table"/>
 
-5) User 모델 생성하기  
-   위의 Memo 모델에는 Memo 를 소유한 사용자 정보가 없습니다. 사용자 모델을 추가해봅시다.
+5) User model
+   The Memo model above does not have any user information that owns Memo. Let's add a user model.
 
    ```javascript
    // modules/user/entity.ts
@@ -258,13 +258,13 @@ server.listen(+PORT, '0.0.0.0', (err) => {
    }
    ```
 
-   db 데코레이터에 memo repository 를 추가했던 것과 같은 방법으로 user repository 도 추가합니다.
+   Add the user repository in the same way you added the memo repository to the db decorator.
 
    ```javascript
    import fp from 'fastify-plugin';
    import { createConnection, getConnectionOptions } from 'typeorm';
    import { Memo } from '../modules/memo/entity';
-   import { User } from '../modules/user/entity'; // 추가된 부분 ✨
+   import { User } from '../modules/user/entity'; // Added part ✨
 
    export default fp(async (fastify) => {
      try {
@@ -273,7 +273,7 @@ server.listen(+PORT, '0.0.0.0', (err) => {
 
        fastify.decorate('db', {
          memo: connection.getRepository(Memo),
-         user: connection.getRepository(User), // 추가된 부분 ✨
+         user: connection.getRepository(User), // Added part ✨
        });
      } catch (error) {
        console.log(error);
@@ -281,7 +281,7 @@ server.listen(+PORT, '0.0.0.0', (err) => {
    });
    ```
 
-   그리고 Memo 모델에 (메모를 소유한) 사용자 정보를 추가합니다.
+   Then add user information (which owns the memo) to the Memo model.
 
    ```javascript
    // src/modules/memo/entity.ts
@@ -291,8 +291,8 @@ server.listen(+PORT, '0.0.0.0', (err) => {
      Entity,
      PrimaryGeneratedColumn,
      UpdateDateColumn,
-     ManyToOne, // 추가된 부분 ✨
-     JoinColumn, // 추가된 부분 ✨
+     ManyToOne, // Added part ✨
+     JoinColumn, // Added part ✨
    } from 'typeorm';
 
    @Entity()
@@ -306,9 +306,9 @@ server.listen(+PORT, '0.0.0.0', (err) => {
      @Column({ type: 'varchar', length: 1000, nullable: false })
      content: string;
 
-     @ManyToOne((type) => User) // 추가된 부분 ✨
-     @JoinColumn({ name: 'user_id' }) // 추가된 부분 ✨
-     user: User; // 추가된 부분 ✨
+     @ManyToOne((type) => User) // Added part ✨
+     @JoinColumn({ name: 'user_id' }) // Added part ✨
+     user: User; // Added part ✨
 
      @CreateDateColumn()
      created_at: Date;
@@ -318,6 +318,6 @@ server.listen(+PORT, '0.0.0.0', (err) => {
    }
    ```
 
-   다시 npm start 를 해보면 user table 이 성공적으로 생성되었고 memo table 에 user_id 가 추가되었습니다!!!!
+   If you try `npm start` again, the user table has been created successfully and user_id has been added to the memo table !!!!
    <image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-1/3.png" width="100%" alt="memo table 2"/>
    <image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-1/4.png" width="100%" alt="user table"/>

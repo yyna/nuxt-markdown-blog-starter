@@ -1,7 +1,7 @@
 ---
 name: 'building-rest-api-using-fastify-typescript-typeorm-2'
 trans: 'building-rest-api-using-fastify-typescript-typeorm-2'
-title: fastify.js, typeORM, typescript 를 이용한 RESTful API 만들기 - (2) Route 생성, Middleware, Handler 작성
+title: Building RESTful API using fastify.js, typeORM, typescript - (2) Route, Middleware, Handler
 year: 17 May 2020
 color: '#edece7'
 isTextColorDark: true
@@ -9,12 +9,12 @@ extraComponent: 'Datatable'
 id: 'building-rest-api-using-fastify-typescript-typeorm-2'
 category: 'fastify'
 description: |
-  Route 생성를 생성하고 Middleware, Handler 작성해봅시다.
+  Let's create Route, Middleware and Handler.
 ---
 
-### Route 생성
+### Create Route
 
-1.  /memo route 추가하기
+1.  Add /memo route
 
     ```javascript
     // src/modules/router.ts
@@ -45,9 +45,9 @@ description: |
     });
     ```
 
-    fastify 인스턴스에 바로 Routes 를 추가할 수 있습니다. 자세한 내용은 https://www.fastify.io/docs/latest/Routes/ 를 참조해주세요.
+    You can add Routes directly to your fastify instance. See [https://www.fastify.io/docs/latest/Routes/](https://www.fastify.io/docs/latest/Routes/) for more information.
 
-    이제 { hello: 'world' } 를 응답하는 test code 를 지우고 route 를 추가해봅시다. decorator 를 등록하는 방법과 동일힙니다.
+    Now let's delete the test code that responses { hello: 'world' } and add a route. This is the same as registering decorator.
 
     ```javascript
     // src/index.ts
@@ -55,7 +55,7 @@ description: |
     import { Server, IncomingMessage, ServerResponse } from 'http';
 
     import db from './decorators/db';
-    import memo from './modules/memo/router'; // 추가된 부분 ✨
+    import memo from './modules/memo/router'; // Added part ✨
 
     const PORT = process.env.PORT || '3000';
     const server: fastify.FastifyInstance<
@@ -65,18 +65,18 @@ description: |
     > = fastify({ logger: true });
 
     server.register(db);
-    server.register(memo); // 추가된 부분 ✨
+    server.register(memo); // Added part ✨
 
     server.listen(+PORT, '0.0.0.0', (err) => {
       if (err) throw err;
     });
     ```
 
-2.  http request 만들기  
-    테스트를 위해 VSCode extension 을 사용해서 http request 를 테스트해봅시다. Postman 으로 고통받고 있는 저를 보고 옆자리 개발자분이 추천해주셨는데 엄청 편리하더라구요.
-    https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+2.  Create http request  
+    For testing, let's test the http request using the VSCode extension. After seeing me suffering from Postman, the developer next door recommended it and it was very convenient.
+    [https://marketplace.visualstudio.com/items?itemName=humao.rest-client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 
-    memo.http 파일을 생성
+    Create memo.http file
 
     ```
      # src/tests/requests/memo.http
@@ -99,10 +99,10 @@ description: |
     ```
 
     <image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-2/1.png" width="100%" alt="memo http"/>
-    `Send Request` 텍스트를 눌러 바로 http request 생성이 가능합니다. 물론 서버가 실행중이어야 합니다. 5가지 request 모두 성공적으로 response 가 오네요. 💃🏻🕺🏻💃🏻🕺🏻
+    You can create http request by clicking `Send Request`. Of course, the server must be running. All five requests have successfully responded. 💃🏻🕺🏻💃🏻🕺🏻
 
-3.  /user route 추가
-    memo route 를 추가한 것과 같은 방법으로 user route 도 추가합니다.
+3.  Add /user route  
+    Add user routes in the same way you add memo routes.
 
     ```javascript
     // src/index.ts
@@ -111,7 +111,7 @@ description: |
 
     import db from './decorators/db';
     import memo from './modules/memo/router';
-    import user from './modules/user/router'; // 추가된 부분 ✨
+    import user from './modules/user/router'; // Added part ✨
 
     const PORT = process.env.PORT || '3000';
     const server: fastify.FastifyInstance<
@@ -122,14 +122,14 @@ description: |
 
     server.register(db);
     server.register(memo);
-    server.register(user); // 추가된 부분 ✨
+    server.register(user); // Added part ✨
 
     server.listen(+PORT, '0.0.0.0', (err) => {
       if (err) throw err;
     });
     ```
 
-    http request 도 날려봅시다. 💃🏻🕺🏻💃🏻🕺🏻
+    Let's make http request too. 💃🏻🕺🏻💃🏻🕺🏻
 
     ```
      # src/tests/requests/user.http
@@ -142,10 +142,10 @@ description: |
      POST {{host}}/sign-in HTTP/1.1
     ```
 
-### Middleware 생성
+### Create Middleware
 
-1.  auth middleware 추가하기
-    memo route 에 인증된 사용자만 접근할 수 있도록 middleware 를 추가합니다. JWT를 사용합니다.
+1.  Add auth middleware  
+    Add middleware so that only authorized users can access the memo route. I use JWT.
 
     ```javascript
     // src/middlewares/auth.ts
@@ -168,7 +168,7 @@ description: |
     });
     ```
 
-    fastify 인스턴스에 추가합니다.
+    Add it to your fastify instance.
 
     ```javascript
     // src/index.ts
@@ -176,7 +176,7 @@ description: |
     import { Server, IncomingMessage, ServerResponse } from 'http';
 
     import db from './decorators/db';
-    import auth from './middlewares/auth'; // 추가된 부분 ✨
+    import auth from './middlewares/auth'; // Added part ✨
 
     import memo from './modules/memo/router';
     import user from './modules/user/router';
@@ -189,7 +189,7 @@ description: |
     > = fastify({ logger: true });
 
     server.register(db);
-    server.register(auth); // 추가된 부분 ✨
+    server.register(auth); // Added part ✨
 
     server.register(memo);
     server.register(user);
@@ -199,8 +199,8 @@ description: |
     });
     ```
 
-2.  FastifyInstance interface 에 property 추가하기  
-    fastify 인스턴스에 db, auth, jwt decorator 를 추가했지만 FastifyInstance interface 에는 해당 property 가 없기때문에 사용을 위해 interface 변경이 필요합니다.
+2.  Adding properties to the FastifyInstance interface  
+    db, auth, and jwt decorator are added to the fastify instance, but the interface is required for use because the FastifyInstance interface does not have the corresponding property.
 
     ```javascript
     // src/@types/fastify/index.d.ts
@@ -228,138 +228,138 @@ description: |
     }
     ```
 
-### Handler 작성하기
+### Create Handler
 
-1.  로그인/회원가입 handler 작성하기
+1. Create sign-up/sign-in handler
 
-    ```javascript
-    // src/modules/user/router.ts
-    import fp from 'fastify-plugin';
-    import bcrypt from 'bcrypt';
+   ```javascript
+   // src/modules/user/router.ts
+   import fp from 'fastify-plugin';
+   import bcrypt from 'bcrypt';
 
-    export default fp((server, opts, next) => {
-      server.post('/sign-up', async (request, reply) => {
-        const { email, password } = request.body;
-        const user = await server.db.user.findOne({ email });
+   export default fp((server, opts, next) => {
+     server.post('/sign-up', async (request, reply) => {
+       const { email, password } = request.body;
+       const user = await server.db.user.findOne({ email });
 
-        if (user) {
-          reply.code(409).send('EMAIL_ALREADY_TAKEN');
-        } else {
-          await server.db.user.save({
-            email,
-            password: bcrypt.hashSync(password, 8),
-          });
-          reply.code(201).send();
-        }
-      });
+       if (user) {
+         reply.code(409).send('EMAIL_ALREADY_TAKEN');
+       } else {
+         await server.db.user.save({
+           email,
+           password: bcrypt.hashSync(password, 8),
+         });
+         reply.code(201).send();
+       }
+     });
 
-      server.post('/sign-in', async (request, reply) => {
-        const { email, password } = request.body;
-        const user = await server.db.user.findOne({ email });
+     server.post('/sign-in', async (request, reply) => {
+       const { email, password } = request.body;
+       const user = await server.db.user.findOne({ email });
 
-        if (user) {
-          // check password
-          if (bcrypt.compareSync(password, user.password)) {
-            const token = server.jwt.sign(user.id + '');
-            reply.code(200).send({ token });
-          }
-          // password mismatch
-          else {
-            reply.code(401).send('PASSWORD_MISMATCH');
-          }
-        } else {
-          reply.code(404).send('USER_NOT_FOUND');
-        }
-      });
+       if (user) {
+         // check password
+         if (bcrypt.compareSync(password, user.password)) {
+           const token = server.jwt.sign(user.id + '');
+           reply.code(200).send({ token });
+         }
+         // password mismatch
+         else {
+           reply.code(401).send('PASSWORD_MISMATCH');
+         }
+       } else {
+         reply.code(404).send('USER_NOT_FOUND');
+       }
+     });
 
-      next();
-    });
-    ```
+     next();
+   });
+   ```
 
-    user.http 파일에 Content-Type 과 request.body 를 추가한 후 테스트 해봅니다.
+   Test it after adding Content-Type and request.body to the user.http file.
 
-    ```
-    # src/tests/requests/user.http
-    @host = http://localhost:3000
+   ```
+   # src/tests/requests/user.http
+   @host = http://localhost:3000
 
-    ################################################ sign up
-    POST {{host}}/sign-up HTTP/1.1
-    Content-Type: application/json
+   ################################################ sign up
+   POST {{host}}/sign-up HTTP/1.1
+   Content-Type: application/json
 
-    {
-        "email": "test@email.com",
-        "password": "testpassword"
-    }
+   {
+       "email": "test@email.com",
+       "password": "testpassword"
+   }
 
-    ################################################ sign in
-    POST {{host}}/sign-in HTTP/1.1
-    Content-Type: application/json
+   ################################################ sign in
+   POST {{host}}/sign-in HTTP/1.1
+   Content-Type: application/json
 
-    {
-        "email": "test@email.com",
-        "password": "testpassword"
-    }
-    ```
+   {
+       "email": "test@email.com",
+       "password": "testpassword"
+   }
+   ```
 
-2.  메모 CRUD handler 작성하기  
-    메모 handler 는 사용자 handler 와 다르게 preValidation 옵션을 사용합니다. 인증된 사용자만 접근할 수 있기 때문입니다. preValidation 으로 추가된 auth middleware 를 거쳐 request.user 에 사용자 정보가 담긴 채로 handler 에 전달 됩니다.
+2. Creating memo CRUD handler  
+   The memeo handler uses the `preValidation` option differently from the user handler. This is because only authenticated users can access it. After passing through auth middleware added as preValidation, it is passed to handler with user information in request.user.
 
-    ```javascript
-    // src/modules/memo/router.ts
-    // ....
+   ```javascript
+   // src/modules/memo/router.ts
+   // ....
 
-    server.get(
-      '/memo',
-      { preValidation: server.auth },
-      async (request, reply) => {
-        const memos = await server.db.memo.find({
-          where: {
-            user: +request.user,
-          },
-        });
-        reply.code(200).send({ memos });
-      }
-    );
+   server.get(
+     '/memo',
+     { preValidation: server.auth },
+     async (request, reply) => {
+       const memos = await server.db.memo.find({
+         where: {
+           user: +request.user,
+         },
+       });
+       reply.code(200).send({ memos });
+     }
+   );
 
-    // ...
-    ```
+   // ...
+   ```
 
-    [github 에서 router.ts 전체 코드 보기](https://github.com/yyna/fastify-typescript-typeorm/blob/master/src/modules/memo/router.ts)
+   [See full code of router.ts on github](https://github.com/yyna/fastify-typescript-typeorm/blob/master/src/modules/memo/router.ts)
 
-3.  global 에러 핸들러 추가
-    모든 에러를 한 곳에서 처리하기 위해 handler 에서 에러를 처리하지 않았습니다.
+3. Add global error handler  
+    In order to handle all errors in one place, the handler did not handle any errors.
 
-    ```javascript
-    // src/index.ts
-    // ...
-    server.setErrorHandler((error, request, reply) => {
-      const statusCode = error.statusCode || 500;
-      const message = error.message || 'INTERNAL_SERVER_ERROR';
-      reply.code(statusCode).send({
-        statusCode,
-        message,
-      });
-    });
-    // ...
-    ```
+   ```javascript
+   // src/index.ts
+   // ...
+   server.setErrorHandler((error, request, reply) => {
+     const statusCode = error.statusCode || 500;
+     const message = error.message || 'INTERNAL_SERVER_ERROR';
+     reply.code(statusCode).send({
+       statusCode,
+       message,
+     });
+   });
+   // ...
+   ```
 
-    [github 에서 index.ts 전체 코드 보기](https://github.com/yyna/fastify-typescript-typeorm/blob/master/src/index.ts)
+   [See full code of index.ts on github](https://github.com/yyna/fastify-typescript-typeorm/blob/master/src/index.ts)
 
-### 실행해보기
+### Try it
 
-처음 만들고자 했던 API 접근 권한에 대해 다시 보면 아래와 같습니다.
+Looking back at the API access rights that we wanted to create for the first time:
 
-> 인증된 사용자만 메모를 Create, Read, Update, Delete 할 수 있고 메모를 Create 한 사용자만 해당 메모를 Read, Update, Delete 하는 RESTful API 를 작성해봅시다.
+> Let's write a RESTful API that allows only authenticated users to create, read, update, and delete notes, and only those who have created notes can read, update, and delete them.
 
-/memo route 에 접근하기 위해서는 JWT token 이 필요합니다.  
-회원가입 후 로그인시 응답에 포함된 token 을 memo.http 상단의 token 에 추가하면 memo route에 접근 가능합니다.
+A JWT token is required to access the /memo route.  
+When you log in after signing up, you can access the memo route by adding the token included in the response to the token at the top of memo.http.
 
-<image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-2/2.png" width="100%" alt="로그인 응답 예시"/>
+<image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-2/2.png" width="100%" alt="Example login response"/>
 
-아래 예시의 id=2, id=3 인 memo 는 id=1 인 사용자만 접근 가능합니다. 회원가입, 로그인 및 메모 Create, Read, Update, Delete 가 잘 작동됨을 확인할 수 있습니다.
+In the example below, memo with id = 2 and id = 3 is accessible only to users with id = 1. You can see that registration, login and memo Create, Read, Update, Delete works well.
 
 <image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-2/3.png" width="100%" alt="user table"/>
 <image-responsive imageURL="blog/building-rest-api-using-fastify-typescript-typeorm-2/4.png" width="100%" alt="memo table"/>
 
-RESTful API 가 완성되었습니다! 전체 코드는 github 에서 확인하실 수 있습니다.  
-[github 에서 전체 코드 보기](https://github.com/yyna/fastify-typescript-typeorm)
+RESTful API is complete! The full code can be found on github.  
+[See full code on github](https://github.com/yyna/fastify-typescript-typeorm)
