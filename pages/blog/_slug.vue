@@ -123,6 +123,8 @@ export default {
         { name: "description", property: "og:description", content: this.description, hid: "description" },
         { property: "og:title", content: this.pageTitle },
         { property: "og:image", content: this.ogImage },
+        { property: "og:image:width", content: 900 },
+        { property: "og:image:height", content: 481 },
         { name: "twitter:description", content: this.description },
         { name: "twitter:image", content: this.ogImage }
       ],
