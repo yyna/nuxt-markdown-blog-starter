@@ -141,7 +141,7 @@ export default {
       return `${process.env.baseUrl}/images/blog/${this.id}/_thumbnail.png`;
     },
     pageTitle () {
-      return this.title + ' – Jungin Kwon';
+      return this.title + ' – { yyna.dev }';
     },
     showLocales () {
       return this.$i18n.locales.filter(locale => locale.code !== this.$i18n.locale)
