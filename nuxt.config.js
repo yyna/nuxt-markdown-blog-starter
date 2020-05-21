@@ -27,7 +27,7 @@ const productionUrl = {
   en: '/en',
   ko: '/ko',
 };
-const baseUrl = 'https://admiring-einstein-7ae0fb.netlify.app';
+const baseUrl = 'https://yyna.dev';
 
 module.exports = {
   env: {

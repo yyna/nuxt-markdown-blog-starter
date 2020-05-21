@@ -14,7 +14,11 @@
         >
           <fa :icon="['fab', 'linkedin']" />
         </a>
-        <a href="https://twitter.com/yyna_kwon" target="_blank" class="ani">
+        <a
+          href="https://twitter.com/yyna_kwon"
+          target="_blank"
+          class="ani"
+        >
           <fa :icon="['fab', 'twitter']" />
         </a>
       </div>
@@ -23,10 +27,15 @@
     <div class="code">
       <div class="container">
         <code>
-          { "Name": "Jungin Kwon", "Location": "Seoul, Korea 🇰🇷", "Job":
-          "Software Engineer", "Technology Stacks": { "Back-end Development":
-          ["Node.js", "MySQL", "MongoDB", "RESTful API", "Amazon Web Services"],
-          "Front-end Development": ["Vue.js", "Nuxt.js", "Sass"], } }
+  {
+      "Name": "Jungin Kwon",
+      "Location": "Seoul, Korea 🇰🇷",
+      "Job": "Software Engineer",
+      "Technology Stacks": {
+          "Back-end Development": ["Node.js", "MySQL", "MongoDB", "RESTful API", "Amazon Web Services"],
+          "Front-end Development": ["Vue.js", "Nuxt.js", "Sass"],
+      }
+  }
         </code>
       </div>
     </div>
@@ -49,7 +58,7 @@ export default {
     name: 'slide-fade',
   },
 
-  head() {
+    head() {
     return {
       title: '{ yyna.dev }',
       htmlAttrs: {
