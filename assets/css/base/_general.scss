@@ -1,23 +1,25 @@
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html{
+html {
   height: 100%;
 }
 
 body {
   background-color: $background-primary;
-	min-width: 320px;
-	height: 100%;
+  min-width: 320px;
+  height: 100%;
   overflow-x: hidden;
-  transition: transform .5s ease-out;
+  transition: transform 0.5s ease-out;
 
-  @media (min-width: $grid-breakpoint){
+  @media (min-width: $grid-breakpoint) {
     padding-left: 0;
     padding-right: 0;
   }
 
-  &.open-menu{
-    @media (max-width: $grid-breakpoint - 1){
+  &.open-menu {
+    @media (max-width: $grid-breakpoint - 1) {
       transform: translateX($nav-responsive-width);
     }
   }
@@ -25,7 +27,7 @@ body {
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all .4s ease;
+  transition: all 0.4s ease;
 }
 .slide-fade-enter,
 .slide-fade-leave-to {
@@ -34,13 +36,23 @@ body {
 }
 
 @keyframes fadeinmove {
-  from { opacity: 0; transform: translateX(+20%);  }
-  to   { opacity: 1; transform: translateX(0%); }
+  from {
+    opacity: 0;
+    transform: translateX(+20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
 }
 
 @keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .text-negative {
@@ -55,34 +67,34 @@ body {
   -webkit-overflow-scrolling: touch;
   overflow-y: auto;
 
-  @media (min-width: $grid-breakpoint){
+  @media (min-width: $grid-breakpoint) {
     height: auto;
     top: initial;
   }
 }
 
-::selection { 
+::selection {
   background: $primary;
   color: white;
 }
 
-.fa{
+.fa {
   text-decoration: none;
   display: inline-block;
   &:hover,
   &.active,
-  &:focus{
+  &:focus {
     outline: 0;
     text-decoration: none;
   }
 }
 
-img{
+img {
   max-width: 100%;
   height: auto;
 }
 
-.shape{
+.shape {
   width: 100%;
   max-height: 100%;
 }
@@ -90,9 +102,9 @@ img{
   cursor: not-allowed;
 }
 
-li, ul {
-  list-style-type: none;
-}
+// li, ul {
+//   list-style-type: none;
+// }
 
 section {
   margin-bottom: 2.4rem;
@@ -100,8 +112,8 @@ section {
   ul {
     padding: 0;
   }
-  
-  @media (min-width: $screen-sm){
+
+  @media (min-width: $screen-sm) {
     margin-bottom: 7.2rem;
   }
 }
@@ -117,8 +129,7 @@ button {
   cursor: pointer;
   border: 0;
   text-align: center;
-  transition: background 250ms ease-in-out, 
-              transform 150ms ease;
+  transition: background 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
@@ -144,7 +155,7 @@ button:active {
   }
 
   &__field {
-    transition: border .1s ease;
+    transition: border 0.1s ease;
     border: 1px solid $grey-3;
     background-color: white;
     padding: 0 8px;

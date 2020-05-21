@@ -25,7 +25,7 @@ md.use(mip);
 
 const productionUrl = {
   en: '/en',
-  es: '/es',
+  ko: '/ko',
 };
 const baseUrl = 'https://admiring-einstein-7ae0fb.netlify.app';
 
@@ -51,6 +51,11 @@ module.exports = {
       { property: 'og:updated_time', content: builtAt },
     ],
     link: [
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap&subset=korean',
+      },
       {
         rel: 'icon',
         type: 'image/png',
@@ -226,13 +231,6 @@ module.exports = {
       '@/assets/css/base/_grid.scss',
       '@/assets/css/base/_buttons.scss',
     ],
-  },
-
-  webfontloader: {
-    custom: {
-      families: ['Graphik', 'Tiempos Headline'],
-      urls: ['/fonts/fonts.css'],
-    },
   },
 
   generate: {

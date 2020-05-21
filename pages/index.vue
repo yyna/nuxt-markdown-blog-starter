@@ -14,21 +14,19 @@
         >
           <fa :icon="['fab', 'linkedin']" />
         </a>
+        <a href="https://twitter.com/yyna_kwon" target="_blank" class="ani">
+          <fa :icon="['fab', 'twitter']" />
+        </a>
       </div>
       <br />
     </div>
     <div class="code">
       <div class="container">
         <code>
-  {
-      "Name": "Jungin Kwon",
-      "Location": "Seoul, Korea 🇰🇷",
-      "Job": "Software Engineer",
-      "Technology Stacks": {
-          "Back-end Development": ["Node.js", "MySQL", "MongoDB", "RESTful API", "Amazon Web Services"],
-          "Front-end Development": ["Vue.js", "Nuxt.js", "Sass"],
-      }
-  }
+          { "Name": "Jungin Kwon", "Location": "Seoul, Korea 🇰🇷", "Job":
+          "Software Engineer", "Technology Stacks": { "Back-end Development":
+          ["Node.js", "MySQL", "MongoDB", "RESTful API", "Amazon Web Services"],
+          "Front-end Development": ["Vue.js", "Nuxt.js", "Sass"], } }
         </code>
       </div>
     </div>
@@ -49,6 +47,36 @@ export default {
 
   transition: {
     name: 'slide-fade',
+  },
+
+  head() {
+    return {
+      title: '{ yyna.dev }',
+      htmlAttrs: {
+        lang: this.$i18n.locale,
+      },
+      meta: [
+        { name: 'author', content: 'Jungin Kwon' },
+        {
+          name: 'description',
+          property: 'og:description',
+          content: "Jungin Kwon's Dev Blog",
+          hid: 'description',
+        },
+        { property: 'og:title', content: '{ yyna.dev }' },
+        {
+          property: 'og:image',
+          content: `${process.env.baseUrl}/images/_thumbnail.png`,
+        },
+        { property: 'og:image:width', content: 900 },
+        { property: 'og:image:height', content: 481 },
+        { name: 'twitter:description', content: "Jungin Kwon's Dev Blog" },
+        {
+          name: 'twitter:image',
+          content: `${process.env.baseUrl}/images/_thumbnail.png`,
+        },
+      ],
+    };
   },
 
   data() {

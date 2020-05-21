@@ -40,6 +40,8 @@ export default {
   }
 }
 .blog {
+  list-style-type: none;
+
   @media (min-width: $screen-sm) {
     padding-bottom: 0;
 
@@ -60,7 +62,6 @@ export default {
   }
 
   &__title {
-    font-family: 'Tiempos Headline', 'Gothic A1', Arial, sans-serif;
     color: $secondary;
     font-size: 2.5rem;
     transition: color 0.3s;

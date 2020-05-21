@@ -57,28 +57,30 @@ export default {
 
   head() {
     return {
-      title: this.$t('indexPageHead.title'),
+      title: 'BLOG | { yyna.dev }',
       htmlAttrs: {
         lang: this.$i18n.locale,
       },
-      script: [
-        { src: 'https://identity.netlify.com/v1/netlify-identity-widget.js' },
-      ],
       meta: [
         { name: 'author', content: 'Jungin Kwon' },
         {
           name: 'description',
           property: 'og:description',
-          content: this.$t('indexPageHead.description'),
+          content: "Jungin Kwon's Dev Blog",
           hid: 'description',
         },
-        { property: 'og:title', content: this.$t('indexPageHead.title') },
-        { property: 'og:image', content: this.ogImage },
+        { property: 'og:title', content: 'BLOG | { yyna.dev }' },
         {
-          name: 'twitter:description',
-          content: this.$t('indexPageHead.description'),
+          property: 'og:image',
+          content: `${process.env.baseUrl}/images/_thumbnail.png`,
         },
-        { name: 'twitter:image', content: this.ogImage },
+        { property: 'og:image:width', content: 900 },
+        { property: 'og:image:height', content: 481 },
+        { name: 'twitter:description', content: "Jungin Kwon's Dev Blog" },
+        {
+          name: 'twitter:image',
+          content: `${process.env.baseUrl}/images/_thumbnail.png`,
+        },
       ],
     };
   },

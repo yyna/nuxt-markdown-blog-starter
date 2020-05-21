@@ -143,7 +143,7 @@ export default {
       return `${process.env.baseUrl}/images/blog/${this.id}/_thumbnail.png`;
     },
     pageTitle () {
-      return this.title + ' – { yyna.dev }';
+      return this.title + ' | { yyna.dev }';
     },
     showLocales () {
       return this.$i18n.locales.filter(locale => locale.code !== this.$i18n.locale)
@@ -231,7 +231,6 @@ export default {
 
   &__title {
     font-size: 3rem;
-    font-family: 'Tiempos Headline', Arial, sans-serif;
     color: $secondary;
 
     @media (min-width: $screen-sm) {
@@ -279,9 +278,9 @@ export default {
     padding-bottom: 2rem;
   }
 
-  li {
-    list-style-type: initial;
-  }
+  // li {
+  //   list-style-type: initial;
+  // }
 
   pre {
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
