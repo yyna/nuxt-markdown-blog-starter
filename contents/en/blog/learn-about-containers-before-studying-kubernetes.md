@@ -78,7 +78,7 @@ Case 3 - Decided to reduce the number of servers due to the reduced traffic
 
 Every time you update, every time there's a change in traffic, simple tasks keep repeating.... Annoying... Network traffic monitoring can be done by a computer, so I want the computer to judge it properly to increase or decrease the number of servers. When deploying updates, I want the computer to take care of them one by one and distribute them without interruption... Kubernetes was born with this desire from infrastructure managers...!!!!!
 
-## Of course, there are other Container Orchestration systems. Kubernetes is the most used and has many references, so I'm going to study it.
+Of course, there are other Container Orchestration systems. Kubernetes is the most used and has many references, so I'm going to study it.
 
 ### appendix. Terminology
 
