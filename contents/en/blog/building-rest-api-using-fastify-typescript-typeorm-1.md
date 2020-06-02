@@ -12,7 +12,7 @@ description: |
 
 ## What to make
 
-I'm using fastify.js and PostgreSQL in my new job, which I started on Monday, so I want to create a simple project for my study. 🤓
+I want to create a simple project to study fastify.js and PostgreSQL. 🤓
 
 Let's write a RESTful API that allows only authenticated users to create, read, update, and delete notes, and only those who have created notes can read, update, and delete them.
 

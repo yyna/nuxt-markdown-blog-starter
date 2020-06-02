@@ -110,7 +110,7 @@ export default {
     seo: false
   },
 
-  components: { DynamicMarkdown},
+  components: { DynamicMarkdown },
 
   head () {
     return {
