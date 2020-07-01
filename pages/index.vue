@@ -32,8 +32,9 @@
       "Location": "Seoul, Korea 🇰🇷",
       "Job": "Software Engineer",
       "Technology Stacks": {
-          "Back-end Development": ["Node.js", "MySQL", "MongoDB", "RESTful API", "Amazon Web Services"],
-          "Front-end Development": ["Vue.js", "Nuxt.js", "Sass"],
+          "Back-end Development": ["PostgreSQL", "Node.js", "MySQL", "MongoDB", "RESTful API"],
+          "Front-end Development": ["Responsive web", "Vue.js", "Nuxt.js", "Sass"],
+          "DevOps": ["Kubernetes", "Amazon Web Services"]
       }
   }
         </code>
@@ -91,6 +92,25 @@ export default {
   data() {
     return {
       works: [
+        {
+          name: {
+            en: 'Miso',
+            ko: '미소',
+          },
+          period: 'May, 2020 - Present',
+          position: 'Back-end Developer',
+          description: {
+            en:
+              'Miso is Korea\'s No. 1 home service company that provides all necessary services for daily life, from domestic help to moving to interior.',
+            ko:
+              '미소는 가사도우미부터 이사, 인테리어까지 생활에 필요한 모든 서비스를 제공하는 대한민국 1등 홈서비스 회사입니다.',
+          },
+          technologyStacks: 'Kubernetes, PostgreSQL, GraphQL',
+          homepage: 'https://miso.kr',
+          android: 'https://play.google.com/store/apps/details?id=com.miso&hl=ko',
+          ios: 'https://apps.apple.com/kr/app/%EB%AF%B8%EC%86%8C/id1071778654',
+          working: true,
+        },
         {
           name: {
             en: 'Choreofactory',
