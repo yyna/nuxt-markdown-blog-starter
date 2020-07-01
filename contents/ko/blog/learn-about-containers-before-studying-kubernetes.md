@@ -5,7 +5,7 @@ id: 'learn-about-containers-before-studying-kubernetes'
 title: Kubernetes 배우기 전에 Container에 대해 알아보기
 year: 2 June 2020
 isTextColorDark: true
-category: 'kubernetes'
+category: 'container'
 description: |
   컨테이너는 무엇이며 왜 필요할까요?
 ---

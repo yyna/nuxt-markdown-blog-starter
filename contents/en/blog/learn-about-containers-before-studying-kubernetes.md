@@ -6,7 +6,7 @@ title: Learning containers before studying Kubernetes
 
 year: 2 June 2020
 isTextColorDark: true
-category: 'kubernetes'
+category: 'container'
 description: |
   What are containers? Why do you need them?
 ---
