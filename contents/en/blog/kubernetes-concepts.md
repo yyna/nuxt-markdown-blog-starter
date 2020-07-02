@@ -10,15 +10,21 @@ description: |
   Container orchestration, Kubernetes Architecture and Practices
 ---
 
-## What is Container Ochestration?
+In my [last post](https://yyna.dev/en/blog/learn-about-containers-before-studying-kubernetes), before I started studying Kubernetes, I looked at why containers are needed.
 
-Optimizing and automating the deployment process of multiple containers is called container orchestration. To look at three of the most popular tools today,
+In [Kubernetes website](https://kubernetes.io/), Kubernetes introduces itself like this.
+
+> Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.
+
+Optimizing and automating the deployment process of multiple containers is called `Container Ochestration`. Yes, Kubernetes is a container orchestration tool.
+
+To look at three of the most popular tools today,
 
 - Docker Swarm: Easy, but lacks auto scailing
 - Kubernetes: Most famous, difficult to get started, available on cloud services (GCP, Azure, AWS)
 - Apache Mesos: It's hard to get started, but there are many features
 
-I'm trying to learn Kubernetes which is the most used. 🤓
+I'm trying to learn Kubernetes which is the most popular today. 🔥
 
 <br/><br/>
 
@@ -48,13 +54,21 @@ Kubernetes consists of a master node that manages the cluster and a worker node 
 
 <br/><br/>
 
-## Running local
+## Running on the local machine
 
 - [Minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)  
-  Since it is difficult to separately configure the Master and Worker nodes in local machine, a cluster in which the Master and Worker nodes are combined is used.
+  Since it is cumbersome to configure the master and worker nodes on local machines, we practice using the minikube cluster in which the master and worker nodes are combined.  
+  Install it referring to the link above.
+
   <image-responsive imageURL="blog/kubernetes-concepts/3.png" width="100%" alt="master-worker"/>
 
-  <image-responsive imageURL="blog/kubernetes-concepts/4.png" width="100%" alt="minikube"/>
+  After installation, run minikube using the command below.
+
+  ```
+  minikube start
+  ```
+
+<image-responsive imageURL="blog/kubernetes-concepts/4.png" width="100%" alt="minikube"/>
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)  
   Command tool for managing Kubernetes clusters. Can be used like this:
@@ -130,6 +144,8 @@ As the number of requests increases/decreases, multiple pods are created for hig
 ReplicaSet is a new object developed to improve Replication Controller. You can easily see the difference by looking at the YAML file.
 
 ```yaml
+## YAML of ReplicationController
+
 apiVersion: v1
 kind: ReplicationController
 metadata:
@@ -147,6 +163,8 @@ template:
 ```
 
 ```yaml
+## YAML of ReplicaSet
+
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
@@ -198,7 +216,7 @@ spec:
 If there is a Pod whose label is `type: front-end`, include it in ReplicaSet, and if additional creation is needed, create a new Pod using spec > template information.  
 ⭐️ Therefore, the label information of the template must match the selector information. ⭐️
 
-```base
+```
 kubectl create -f replicaset-definition.yaml
 ```
 
@@ -206,10 +224,12 @@ kubectl create -f replicaset-definition.yaml
 
 Since there is one myapp-pod created above, you can see that only two pods are created.
 Really keep three? I'm curious, so let's delete one.
-<image-responsive imageURL="blog/kubernetes-concepts/10.png" width="100%" alt="delete-pod"/>
+
 ReplicaSet is working hard to keep 3 pods! 😆
 
-### How to scale
+<image-responsive imageURL="blog/kubernetes-concepts/10.png" width="100%" alt="delete-pod"/>
+
+### How to scale 🏗
 
 Let's increase the number of pods to 6. There are two ways.
 
@@ -226,7 +246,7 @@ Let's increase the number of pods to 6. There are two ways.
    kubectl scale --replicas=6 replicaset myapp-replicaset
    ```
 
-In case 2, it is simple, but it is difficult to manage because the number of pods actually created is different from the information defined in the `replicaset-definition.yaml` file. Let's use the first way!
+In case 2, it is simple, but it is difficult to manage because the number of pods actually created is different from the information defined in the `replicaset-definition.yaml` file. **Let's use the first way!**
 
 <image-responsive imageURL="blog/kubernetes-concepts/11.png" width="100%" alt="scale-pod"/>
 
@@ -240,6 +260,7 @@ Deployment is also created by a YAML file.
 
 ```yml
 # deployment-definition.yaml
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:

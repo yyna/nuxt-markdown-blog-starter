@@ -302,7 +302,6 @@ export default {
     display: inline;
     color: $secondary;
     font-size: 14px;
-    padding: 0.2em 0.4em;
 
     @media (min-width: $screen-sm) {
       font-size: 16px;

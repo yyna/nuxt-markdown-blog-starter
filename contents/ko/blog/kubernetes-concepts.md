@@ -10,15 +10,21 @@ description: |
   컨테이너 오케스트레이션, 쿠버네티스를 구성하고 있는 것들에 대해서 알아보고 간단한 실습을 진행해봅니다.
 ---
 
-## Container Ochestration 이란
+[지난 포스트](https://yyna.dev/blog/learn-about-containers-before-studying-kubernetes)에서는 쿠버네티스를 본격적으로 공부하기에 앞서 컨테이너가 왜 필요한지에 대해 알아봤습니다.
 
-여러 컨테이너의 배포 프로세스를 최적화, 자동화하는 것을 컨테이너 오케스트레이션이라고 합니다. 오늘날 많이 쓰이는 3가지 툴의 특성을 알아보자면,
+[쿠버네티스 홈페이지](https://kubernetes.io/)에 가보면 다음과 같이 쿠버네티스를 설명하고 있습니다.
+
+> Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.
+
+풀어 설명하고 있는 자동 배포, 스케일링, 컨테이너 관리를 한 단어로 정의하면 바로 `Container Ochestration` 입니다. 그렇습니다. 쿠버네티스는 컨테이너 오케스트레이션 툴입니다.
+
+컨테이너 오케스트레이션 툴 중 가장 많이 쓰이는 3가지 툴의 특성을 알아보자면,
 
 - Docker Swarm: 쉽지만 Auto scailing 기능이 조금 부족한 편
-- Kubernetes: 가장 유명함, 처음 시작하기엔 어려운 편, 클라우드 서비스(GCP, Azure, AWS) 에서 지원함
+- Kubernetes: 가장 유명함, 처음 시작하기엔 어려운 편, 클라우드 서비스(GCP, Azure, AWS) 에서 사용할 수 있음
 - Apache Mesos: 처음 시작하기 어렵지만 많은 기능이 있음
 
-그 중 가장 많이 쓰이는 쿠버네티스를 알아보려 합니다. 🤓
+그 중 가장 많이 쓰이는 그리고 핫한 🔥 쿠버네티스에 대해 알아보려 합니다.
 
 <br/><br/>
 
@@ -35,12 +41,12 @@ description: |
 
 ## 쿠버네티스를 구성하고 있는 것들
 
-- API 서버: 외부에서 쿠버네티스 기능을 사용하기 위해서 제공된다.
-- etcd: key store. 클러스터 관리를 위한 데이터들을 key-value 형태로 저장한다. 노드들 사이에 충돌이 없도록 lock 을 구현하는 역할을 맡고있다.
-- kubelet: 각 노드에서 컨테이너가 제대로 작동하도록 한다.
-- Container Runtime: 컨테이너를 실행시키는데 사용되는 프로그램이다. 도커가 여기에 해당한다.
-- Controller: 오케스트레이션의 중추 역할을 한다. 노드, 컨테이너 또는 end point가 제대로 작동하지 않는지 확인한다.
-- Scheduler: 여러 노드들이 일을 나눠서 하도록 한다.
+- API 서버: 외부에서 쿠버네티스 기능을 사용하기 위해서 제공됩니다.
+- etcd: Key store. 클러스터 관리를 위한 데이터들을 key-value 형태로 저장합니다. 여러 노드 사이에 충돌이 없도록 Lock을 구현하는 역할을 맡고있습니다.
+- Kubelet: 각 노드에서 컨테이너가 제대로 작동하도록 합니다.
+- Container Runtime: 컨테이너를 실행시키는데 사용되는 프로그램입니다. 도커가 여기에 해당됩니다.
+- Controller: 오케스트레이션의 중추 역할을 합니다. 노드, 컨테이너 또는 End point가 제대로 작동하는지 확인합니다.
+- Scheduler: 여러 노드들이 일을 나눠서 하도록 합니다.
 
 ### Master - Worker 노드
 
@@ -50,11 +56,19 @@ description: |
 
 ## 로컬에서 사용해보기
 
-- [Minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)  
-  로컬에서는 Master, Worker 노드를 따로 구성하기가 어렵기 때문에 Master와 Worker 노드가 합쳐진 형태의 클러스터를 사용합니다.
+- [minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)  
+  로컬에서는 Master, Worker 노드를 따로 구성하기가 번거롭기 때문에 Master와 Worker 노드가 합쳐진 형태의 minikube 클러스터를 사용해서 실습을 진행합니다.
+  위 링크를 참고해서 설치합니다.
+
   <image-responsive imageURL="blog/kubernetes-concepts/3.png" width="100%" alt="master-worker"/>
 
-  <image-responsive imageURL="blog/kubernetes-concepts/4.png" width="100%" alt="minikube"/>
+  설치 후 아래 명령어를 사용해서 minikube를 실행합니다.
+
+  ```
+  minikube start
+  ```
+
+<image-responsive imageURL="blog/kubernetes-concepts/4.png" width="100%" alt="minikube"/>
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)  
   쿠버네티스 클러스터를 관리하기 위한 명령어 도구입니다. 다음과 같이 사용합니다.
@@ -71,7 +85,7 @@ description: |
 
 쿠버네티스에는 많은 종류의 Resource가 있습니다. (2020년 6월 27일 기준 49개....)  
 [List of Kubernetes Resources](https://kubernetes.io/docs/reference/kubectl/overview/#resource-types)
-그 중 가장 기본이 되는 Pod, ReplicaSet, Deployment를 직접 만들어보고 각 Resource에 대해 이해해보는 시간을 가져보려 합니다.
+그 중 가장 기본이 되는 Pod, ReplicaSet, Deployment를 직접 만들어보고 각 Resource에 대해 이해해보려 합니다.
 
 쿠버네티스가 Object(Resource)를 관리하는 방법은 여러가지가 있습니다. 저는 [YAML](https://en.wikipedia.org/wiki/YAML) Configuration File을 사용해서 실습을 진행합니다.
 
@@ -80,7 +94,7 @@ description: |
 - 쿠버네티스는 컨테이너를 노드에 직접 배포하지 않고 Pod 라는 쿠버네티스 오브젝트에 감싸서 배포한다.
 - 쿠버네티스에서 만들 수 있는 가장 작은 단위이다.
 - Pod는 주로 1개의 컨테이너만 가지지만 여러개의 컨테이너를 가지는 경우도 있다. 예를 들면 사용자가 입력한 데이터를 처리한다거나 사용자가 업로드한 파일을 처리하는 Helper 컨테이너가 필요할 경우이다.
-- 한 Pod 내의 컨테이너 들은 함게 생성되고 죽는 운명의 공동체이다.
+- 한 Pod 내의 컨테이너 들은 함께 생성되고 죽는 운명의 공동체이다.
 
 쿠버네티스 Object 관리를 위한 YAML 파일은 4가지 Root Property를 필수로 가집니다.
 
@@ -126,10 +140,12 @@ kubectl create -f pod-definition.yaml
 
 <image-responsive imageURL="blog/kubernetes-concepts/8.png" width="100%" alt="replicas"/>
 
-요청의 증가/감소에 따라 높은 가용성과 효율성을 위해 여러 개의 Pod이 만들어지기도 합니다. 같은 형태의 여러 Pod을 관리하는 Object가 Replication Controller 또는 ReplicaSet입니다.
+요청의 증가/감소에 따라 높은 가용성과 효율성을 위해 여러 개의 Pod이 만들어지기도 합니다. 같은 형태의 여러 Pod을 관리하는 Object(위 그림에서 노란색 박스로 표시된 부분)가 Replication Controller 또는 ReplicaSet입니다.
 ReplicaSet은 Replication Controller을 개선하기 위해 만들어진 새로운 Object 입니다. YAML 파일을 보면 그 차이를 쉽게 확인할 수 있습니다.
 
 ```yaml
+## ReplicationController 의 YAML
+
 apiVersion: v1
 kind: ReplicationController
 metadata:
@@ -147,6 +163,8 @@ template:
 ```
 
 ```yaml
+## ReplicaSet 의 YAML
+
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
@@ -164,7 +182,7 @@ template:
   ## pod-definition의 metadata, spec 부분만 가져옴
 ```
 
-apiVersion, kind가 다르지만 가장 큰 차이점은 selector 부분입니다.
+두 YAML 파일의 apiVersion, kind가 다르지만 가장 큰 차이점은 selector 부분입니다.
 Replication Controller의 경우 Label이 완전히 일치하는 Pod들만 하나의 세트로 묶을 수 있는 반면 ReplicaSet은 다양한 조건을 설정할 수 있어서 이미 실행 중인 Pod들을 하나의 세트로 묶기에 유용합니다.
 
 위에서 생성한 nginx Pod 3개를 포함하는 ReplicaSet을 생성해봅시다.
@@ -198,7 +216,7 @@ spec:
 label이 `type: front-end`인 Pod이 있으면 ReplicaSet에 포함시키고 추가 생성이 필요한 경우 spec > template 정보를 이용해서 새로운 Pod을 만들어 줍니다.  
 ⭐️ 따라서 template의 label 정보는 selector 정보와 일치해야 합니다. ⭐️
 
-```base
+```
 kubectl create -f replicaset-definition.yaml
 ```
 
@@ -206,10 +224,12 @@ kubectl create -f replicaset-definition.yaml
 
 위에서 만든 myapp-pod가 하나 있기 때문에 2개의 Pod만 더 생기는 모습을 볼 수 있습니다.
 정말 3개를 유지할까요? 궁금하니 하나를 삭제해봅시다.
-<image-responsive imageURL="blog/kubernetes-concepts/10.png" width="100%" alt="delete-pod"/>
+
 3개의 Pod을 유지하기 위해 ReplicaSet이 일을 열심히 해주고 있군요! 😆
 
-### How to scale
+<image-responsive imageURL="blog/kubernetes-concepts/10.png" width="100%" alt="delete-pod"/>
+
+### How to scale 🏗
 
 Pod 수를 6개로 늘려봅시다. 2가지 방법이 있습니다.
 
@@ -226,7 +246,7 @@ Pod 수를 6개로 늘려봅시다. 2가지 방법이 있습니다.
    kubectl scale --replicas=6 replicaset myapp-replicaset
    ```
 
-2번의 경우 간단하지만 실제 만들어진 Pod의 수가 `replicaset-definition.yaml` 파일에 정의된 정보와 다르기 때문에 관리가 어려워집니다. 1번 방법을 사용합시다!
+2번의 경우 간단하지만 실제 만들어진 Pod의 수가 `replicaset-definition.yaml` 파일에 정의된 정보와 다르기 때문에 관리가 어려워집니다. **1번 방법을 사용합시다!**
 
 <image-responsive imageURL="blog/kubernetes-concepts/11.png" width="100%" alt="scale-pod"/>
 
@@ -240,6 +260,7 @@ Deployment 역시 YAML 파일로 생성합니다.
 
 ```yml
 # deployment-definition.yaml
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -279,7 +300,8 @@ ReplicaSet과 비슷해 보입니다.
 <image-responsive imageURL="blog/kubernetes-concepts/14.png" width="100%" alt="upgrade-image"/>
 
 아래 Events를 보면 Upgrade가 어떻게 동작하는지 확인할 수 있습니다. 새로운 ReplicaSet이 만들어지고 기존 ReplicaSet의 Pod 수를 하나씩 줄여가는 방식입니다.  
-ReplicaSet의 Rollout 방식은 위처럼 하나씩 Pod 수가 변경되는 Rolling Update와 모든 Pod이 삭제된 후 새로운 Pod이 생성되는 Recreate가 있습니다.  
+ReplicaSet의 Rollout 방식은 위처럼 하나씩 Pod 수가 변경되는 Rolling Update와 모든 Pod이 삭제된 후 새로운 Pod이 생성되는 Recreate가 있습니다.
+
 default 방식은 Rolling Update입니다.
 
 <image-responsive imageURL="blog/kubernetes-concepts/15.png" width="100%" alt="describe-pod"/>
@@ -300,6 +322,7 @@ ReplicaSet 목록을 확인하면 이전에 만들어진 ReplicaSet의 Pod 수�
 ### 존재하지 않는 이미지일 경우? 🤔
 
 image 정보를 nginx:12.34.56으로 변경 후 Upgrade를 하면 어떻게 될까요?
+
 <image-responsive imageURL="blog/kubernetes-concepts/18.png" width="100%" alt="wrong-image"/>
 
 시간이 계속 지나도 새로운 Deployment의 Pod 수가 늘어나지 않습니다.
