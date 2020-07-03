@@ -35,7 +35,6 @@
                 {{ $t('changeLanguagePost') }}
               </nuxt-link>
             </template>
-            <span v-else>{{ $t('soonLanguagePost') }}</span>
             <h1 class="elevate-cover__title">
               {{ title }}
             </h1>
@@ -78,32 +77,29 @@
 </template>
 
 <script lang="js">
-
 import DynamicMarkdown from "~/components/Markdown/DynamicMarkdown.vue"
 
-
 export default {
-
   async asyncData ({params, app}) {
     const fileContent = await import(`~/contents/${app.i18n.locale}/blog/${params.slug}.md`)
-    const attr = fileContent.attributes
-    return {
-      name: params.slug,
-      title: attr.title,
-      trans: attr.trans,
-      year: attr.year,
-      id: attr.id,
-      cardAlt: attr.cardAlt,
-      noMainImage: attr.noMainImage,
-      description: attr.description,
-      extraComponent: attr.extraComponent,
-      renderFunc: `(${fileContent.vue.render})`,
-      staticRenderFuncs: `[${fileContent.vue.staticRenderFns}]`,
-      image: {
-        main: attr.image && attr.image.main,
-        og: attr.image && attr.image.og
+      const attr = fileContent.attributes
+      return {
+        name: params.slug,
+        title: attr.title,
+        trans: attr.trans,
+        year: attr.year,
+        id: attr.id,
+        cardAlt: attr.cardAlt,
+        noMainImage: attr.noMainImage,
+        description: attr.description,
+        extraComponent: attr.extraComponent,
+        renderFunc: `(${fileContent.vue.render})`,
+        staticRenderFuncs: `[${fileContent.vue.staticRenderFns}]`,
+        image: {
+          main: attr.image && attr.image.main,
+          og: attr.image && attr.image.og
+        }
       }
-    }
   },
 
   nuxtI18n: {
@@ -277,10 +273,6 @@ export default {
     font-size: 2.2rem;
     padding-bottom: 2rem;
   }
-
-  // li {
-  //   list-style-type: initial;
-  // }
 
   pre {
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);

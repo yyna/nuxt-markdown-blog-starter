@@ -3,7 +3,13 @@
     <div class="footer__info">
       <div class="container footer__info-container">
         <div class="footer__copyright">
-          © {{ year }} — <span v-html="$t('footer.credits')" />
+          @ 2020 -
+          <span
+            >Web app coded by
+            <a target="_blank" href="https://yyna.dev/" class="ani"
+              ><span>Jungin Kwon</span></a
+            ></span
+          >
         </div>
       </div>
     </div>
