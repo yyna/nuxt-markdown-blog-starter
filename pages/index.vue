@@ -1,5 +1,16 @@
 <template>
   <div class="page-index">
+    <!-- New Posts -->
+    <div class="container">
+      <h2>🏝 New Posts 🍹</h2>
+      <div class="view-more">
+        <nuxt-link :to="localePath({ name: 'blog' })" class="ani">
+          More posts <fa :icon="['fas', 'arrow-right']" class="arrow-icon"/>
+        </nuxt-link>
+      </div>
+      <BlogSection :blogs="blogs" />
+    </div>
+
     <!-- About me -->
     <div class="container">
       <h2>About me 🙋🏻‍♀️</h2>
@@ -51,9 +62,30 @@
 
 <script>
 import Work from '~/components/Work';
+import BlogSection from '~/components/Sections/BlogSection';
+
+import blogsEn from '~/contents/en/blogsEn.js';
+import blogsKo from '~/contents/ko/blogsKo.js';
 
 export default {
-  components: { Work },
+  async asyncData({ app }) {
+    const blogs = app.i18n.locale === 'en' ? blogsEn : blogsKo;
+
+    async function asyncImport(blogName) {
+      const wholeMD = await import(
+        `~/contents/${app.i18n.locale}/blog/${blogName}.md`
+      );
+      return wholeMD.attributes;
+    }
+
+    return Promise.all(blogs.slice(0, 2).map((blog) => asyncImport(blog))).then((res) => {
+      return {
+        blogs: res,
+      };
+    });
+  },
+
+  components: { Work, BlogSection },
 
   transition: {
     name: 'slide-fade',
@@ -196,6 +228,18 @@ export default {
     code {
       white-space: pre-wrap;
     }
+  }
+
+  .view-more {
+    text-align: right;
+  }
+
+  .arrow-icon {
+    margin-left: 10px;
+  }
+
+  section {
+    margin-bottom: 0;
   }
 }
 </style>
